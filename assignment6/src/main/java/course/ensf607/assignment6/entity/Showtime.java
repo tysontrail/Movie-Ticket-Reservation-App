@@ -34,13 +34,12 @@ public class Showtime implements Serializable {
 
     private Date startTime;
 
-    //TODO
     @ManyToMany
+    @JoinTable(
+        name = "showtime_movies",
+        joinColumns = @JoinColumn(name = "showtime_id"),
+        inverseJoinColumns = @JoinColumn(name = "movie_id"))
     private Movie movie;
-
-    //can be null! TODO
-    @OneToOne
-    private Set<User> attendees;
 
     //TODO
     @ManyToOne

@@ -13,6 +13,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.MapsId;
+import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
@@ -30,12 +31,13 @@ public class Seat implements Serializable {
 	@Column(name = "id")
 	private Long id;
 
-    //can be null! TODO
     @OneToOne
-    private User user;
+    @MapsId
+    @JoinColumn(name = "ticket_id")
+    private Ticket ticket;
 
     //TODO
-    @OneToOne
+    @OneToMany
 	private Showtime showtime;
 
     private int row;

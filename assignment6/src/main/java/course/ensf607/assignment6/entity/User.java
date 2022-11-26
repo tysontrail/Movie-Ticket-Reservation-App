@@ -1,12 +1,15 @@
 package course.ensf607.assignment6.entity;
 
 import java.io.Serializable;
+import java.sql.Date;
+import java.util.Set;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import lombok.Getter;
@@ -31,20 +34,39 @@ public class User implements Serializable {
 
 	private String password;
 
+    private int creditCard;
 
-    public User(String firstName, String lastName, String email, String password) {
-        this.firstName = firstName;
-        this.lastName = lastName;
-        this.email = email;
-        this.password = password;
-    }
+    private int cvcNumber;
 
-    public User(Long id, String firstName, String lastName, String email, String password) {
+    private int expiryDate;
+
+    private Date annualRenewalDate;
+
+    //TODO
+    @OneToMany
+    private Set<Ticket> tickets;
+
+    public User(Long id, String firstName, String lastName, String email, String password, int creditCard,
+            int cvcNumber, int expiryDate) {
         this.id = id;
         this.firstName = firstName;
         this.lastName = lastName;
         this.email = email;
         this.password = password;
+        this.creditCard = creditCard;
+        this.cvcNumber = cvcNumber;
+        this.expiryDate = expiryDate;
+    }
+
+    public User(String firstName, String lastName, String email, String password, int creditCard, int cvcNumber,
+            int expiryDate) {
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.email = email;
+        this.password = password;
+        this.creditCard = creditCard;
+        this.cvcNumber = cvcNumber;
+        this.expiryDate = expiryDate;
     }
 }
 

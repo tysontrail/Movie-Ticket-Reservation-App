@@ -13,6 +13,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.MapsId;
+import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
@@ -34,10 +35,12 @@ public class Theatre implements Serializable {
 
     private String address;
 
-    //TODO maybe just seat capacity so showtime holds seats
-	private Set<Seat> seats;
+    private int seatCols;
+
+	private int seatRows;
 
     //TODO
+    @OneToMany
     private Set<Showtime> showtimes;
 
     @ManyToMany
