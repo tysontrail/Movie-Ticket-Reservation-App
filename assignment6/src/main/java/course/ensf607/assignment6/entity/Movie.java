@@ -1,7 +1,7 @@
 package course.ensf607.assignment6.entity;
 
 import java.io.Serializable;
-import java.sql.Date;
+import java.time.LocalDate;
 import java.util.Set;
 
 import javax.persistence.Column;
@@ -32,9 +32,9 @@ public class Movie implements Serializable {
 
     private String description;
 
-	private Date privateStart;
+	private LocalDate privateStart;
 
-    private Date publicStart;
+    private LocalDate publicStart;
 
 	@JsonIgnore
     @ManyToMany(mappedBy = "movies")
@@ -42,7 +42,22 @@ public class Movie implements Serializable {
 
 	@JsonIgnore
 	@ManyToMany(mappedBy = "movie")
-	private Set<Showtime> showtimes; 
+	private Set<Showtime> showtimes;
+
+	public Movie(Long id, String name, String description, LocalDate privateStart, LocalDate publicStart) {
+		this.id = id;
+		this.name = name;
+		this.description = description;
+		this.privateStart = privateStart;
+		this.publicStart = publicStart;
+	}
+
+	public Movie(String name, String description, LocalDate privateStart, LocalDate publicStart) {
+		this.name = name;
+		this.description = description;
+		this.privateStart = privateStart;
+		this.publicStart = publicStart;
+	} 
 
 }
 

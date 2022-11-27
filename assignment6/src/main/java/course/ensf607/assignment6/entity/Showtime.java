@@ -1,7 +1,7 @@
 package course.ensf607.assignment6.entity;
 
 import java.io.Serializable;
-import java.sql.Date;
+import java.time.LocalDateTime;
 import java.util.Set;
 
 import javax.persistence.Column;
@@ -15,6 +15,8 @@ import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -30,7 +32,7 @@ public class Showtime implements Serializable {
 	@Column(name = "id")
 	private Long id;
 
-    private Date startTime;
+    private LocalDateTime startTime;
 
     @ManyToMany
     @JoinTable(
@@ -39,13 +41,25 @@ public class Showtime implements Serializable {
         inverseJoinColumns = @JoinColumn(name = "movie_id"))
     private Movie movie;
 
-    //TODO
+    @JsonIgnore
     @ManyToOne
+    @JoinColumn(name="theatre_id", nullable=false)
 	private Theatre theatre;
 
-    //TODO
-    @OneToMany
+    @OneToMany(mappedBy="showtime")
     private Set<Seat> seats;
+
+    public Showtime(Long id, LocalDateTime startTime, Movie movie, Theatre theatre) {
+        this.id = id;
+        this.startTime = startTime;
+        this.movie = movie;
+        this.theatre = theatre;
+        for (int i = 1; i <= theatre.getSeatRows(); i++) {
+            for (int j = 1; j <= theatre.getSeatCols(); j++) {
+                seats.add(new Seat(this, i, j));
+            }
+        }
+    }
 
 }
 

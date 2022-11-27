@@ -36,9 +36,11 @@ public class Theatre implements Serializable {
 
 	private int seatRows;
 
-    //TODO
-    @OneToMany
+    @OneToMany(mappedBy="theatre")
     private Set<Showtime> showtimes;
+
+    @OneToMany(mappedBy="theatre")
+    private Set<Ticket> tickets;
 
     @ManyToMany
     @JoinTable(
@@ -47,6 +49,20 @@ public class Theatre implements Serializable {
         inverseJoinColumns = @JoinColumn(name = "movie_id"))
     private Set<Movie> movies;
 
+    public Theatre(Long id, String name, String address, int seatCols, int seatRows) {
+        this.id = id;
+        this.name = name;
+        this.address = address;
+        this.seatCols = seatCols;
+        this.seatRows = seatRows;
+    }
+
+    public Theatre(String name, String address, int seatCols, int seatRows) {
+        this.name = name;
+        this.address = address;
+        this.seatCols = seatCols;
+        this.seatRows = seatRows;
+    }
 
 }
 

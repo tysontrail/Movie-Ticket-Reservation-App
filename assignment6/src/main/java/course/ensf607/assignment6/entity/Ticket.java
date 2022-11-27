@@ -8,6 +8,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 import javax.persistence.PrimaryKeyJoinColumn;
@@ -29,12 +30,14 @@ public class Ticket implements Serializable {
 	@Column(name = "id")
 	private Long id;
 
-    //TODO
+    @JsonIgnore
     @ManyToOne
+    @JoinColumn(name="user_id", nullable=false)
     private User user;
 
-    //TODO
+    @JsonIgnore
     @ManyToOne
+    @JoinColumn(name="theatre_id", nullable=false)
 	private Theatre theatre;
 
     @JsonIgnore
@@ -48,5 +51,23 @@ public class Ticket implements Serializable {
     private Payment payment;
 
 	private double balance;
+
+    public Ticket(Long id, User user, Theatre theatre, Seat seat, Payment payment, double balance) {
+        this.id = id;
+        this.user = user;
+        this.theatre = theatre;
+        this.seat = seat;
+        this.payment = payment;
+        this.balance = balance;
+    }
+
+    public Ticket(User user, Theatre theatre, Seat seat, Payment payment, double balance) {
+        this.user = user;
+        this.theatre = theatre;
+        this.seat = seat;
+        this.payment = payment;
+        this.balance = balance;
+    }
+
 }
 

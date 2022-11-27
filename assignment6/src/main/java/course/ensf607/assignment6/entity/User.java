@@ -1,7 +1,7 @@
 package course.ensf607.assignment6.entity;
 
 import java.io.Serializable;
-import java.sql.Date;
+import java.time.LocalDate;
 import java.util.Set;
 
 import javax.persistence.Column;
@@ -40,11 +40,13 @@ public class User implements Serializable {
 
     private int expiryDate;
 
-    private Date annualRenewalDate;
+    private LocalDate annualRenewalDate;
 
-    //TODO
-    @OneToMany
+    @OneToMany(mappedBy="user")
     private Set<Ticket> tickets;
+
+    @OneToMany(mappedBy="user")
+    private Set<Payment> payments;
 
     public User(Long id, String firstName, String lastName, String email, String password, int creditCard,
             int cvcNumber, int expiryDate) {

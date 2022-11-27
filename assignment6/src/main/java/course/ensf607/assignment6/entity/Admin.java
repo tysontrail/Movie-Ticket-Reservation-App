@@ -46,5 +46,6 @@ public class Admin implements Serializable {
         this.email = email;
         this.password = password;
     }
+    
 }
 

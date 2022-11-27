@@ -27,8 +27,8 @@ public class Payment implements Serializable {
 	@Column(name = "id")
 	private Long id;
 
-    //TODO
     @ManyToOne
+    @JoinColumn(name="user_id", nullable=false)
     private User user;
 
     @OneToOne
@@ -39,5 +39,21 @@ public class Payment implements Serializable {
 	private double balance;
 
     private Boolean paid;
+
+    public Payment(Long id, User user, Ticket ticket, double balance, Boolean paid) {
+        this.id = id;
+        this.user = user;
+        this.ticket = ticket;
+        this.balance = balance;
+        this.paid = paid;
+    }
+
+    public Payment(User user, Ticket ticket, double balance, Boolean paid) {
+        this.user = user;
+        this.ticket = ticket;
+        this.balance = balance;
+        this.paid = paid;
+    }
+
 }
 
