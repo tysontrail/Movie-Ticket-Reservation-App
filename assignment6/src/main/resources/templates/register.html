@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+  <head>
+    <meta charset="ISO-8859-1" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Register</title>
+  </head>
+  <body>
+    <h2>Register</h2>
+    <form action="#" th:action="@{/theatre-selection}">
+      <label for="username">Username:</label><br />
+      <input type="text" id="username" name="username" /><br />
+      <label for="password">Password:</label><br />
+      <input type="text" id="password" name="password" /><br />
+      <br />
+      <input type="submit" value="Submit" />
+    </form>
+    <ul>
+      <li>
+        <a th:href="@{/login}">Back to login</a>
+      </li>
+    </ul>
+  </body>
+</html>
