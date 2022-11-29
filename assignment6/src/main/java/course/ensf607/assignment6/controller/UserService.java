@@ -2,9 +2,13 @@ package course.ensf607.assignment6.controller;
 
 import course.ensf607.assignment6.entity.User;
 import course.ensf607.assignment6.repository.UserRepository;
+import org.springframework.stereotype.Service;
 
+import javax.swing.text.html.Option;
+import java.util.List;
 import java.util.Optional;
 
+@Service
 public class UserService {
 
     /**Aggregate the user repository for changes.
@@ -27,9 +31,13 @@ public class UserService {
     }
 
     //Same as above but for new users.
-    public void addUser(String firstName, String lastName, String email, String password, int creditCard, int cvcNumber,
+    public void addUser(String firstName, String lastName, String userName, String email, String password, int creditCard, int cvcNumber,
                         int expiryDate){
-        User newUser = new User(firstName, lastName, email, password, creditCard, cvcNumber, expiryDate);
+        User newUser = new User(firstName, lastName, userName, email, password, creditCard, cvcNumber, expiryDate);
+        Optional<User> matchingUserName = userRepository.findByUserName(userName);
+        if (matchingUserName.isPresent()){
+            throw new IllegalStateException("Username already in database.");
+        }
         this.userRepository.save(newUser);
     }
 
@@ -37,6 +45,13 @@ public class UserService {
         return this.userRepository.findUserById(id);
     }
 
+    public List<User> searchUserByFirstNameAndLastName(String firstName, String lastName){
+        return this.userRepository.findByFirstNameAndLastNameAllIgnoreCase(firstName, lastName);
+    }
+
+    public Optional<User> searchUserByUserName(String username){
+        return this.userRepository.findByUserName(username);
+    }
     public void deleteUserByID(long id){
         this.userRepository.deleteById(id);
     }

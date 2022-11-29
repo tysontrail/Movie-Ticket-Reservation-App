@@ -26,6 +26,8 @@ public class User implements Serializable {
 	@Column(name = "id")
 	private Long id;
 
+    private String userName;
+
 	private String firstName;
 
     private String lastName;
@@ -48,11 +50,12 @@ public class User implements Serializable {
     @OneToMany(mappedBy="user")
     private Set<Payment> payments;
 
-    public User(Long id, String firstName, String lastName, String email, String password, int creditCard,
+    public User(Long id, String firstName, String lastName, String userName, String email, String password, int creditCard,
             int cvcNumber, int expiryDate) {
         this.id = id;
         this.firstName = firstName;
         this.lastName = lastName;
+        this.userName = userName;
         this.email = email;
         this.password = password;
         this.creditCard = creditCard;
@@ -60,10 +63,11 @@ public class User implements Serializable {
         this.expiryDate = expiryDate;
     }
 
-    public User(String firstName, String lastName, String email, String password, int creditCard, int cvcNumber,
+    public User(String firstName, String lastName, String userName, String email, String password, int creditCard, int cvcNumber,
             int expiryDate) {
         this.firstName = firstName;
         this.lastName = lastName;
+        this.userName = userName;
         this.email = email;
         this.password = password;
         this.creditCard = creditCard;
