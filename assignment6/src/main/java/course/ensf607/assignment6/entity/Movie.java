@@ -41,7 +41,7 @@ public class Movie implements Serializable {
     private Set<Theatre> theatres;
 
 	@JsonIgnore
-	@ManyToMany(mappedBy = "movie")
+	@ManyToMany(mappedBy = "showtimeToMovie")
 	private Set<Showtime> showtimes;
 
 	public Movie(Long id, String name, String description, LocalDate privateStart, LocalDate publicStart) {

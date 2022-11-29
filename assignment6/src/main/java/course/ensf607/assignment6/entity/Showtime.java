@@ -39,7 +39,7 @@ public class Showtime implements Serializable {
         name = "showtime_movies",
         joinColumns = @JoinColumn(name = "showtime_id"),
         inverseJoinColumns = @JoinColumn(name = "movie_id"))
-    private Movie movie;
+    private Set<Movie> showtimeToMovie;
 
     @JsonIgnore
     @ManyToOne
@@ -49,10 +49,10 @@ public class Showtime implements Serializable {
     @OneToMany(mappedBy="showtime")
     private Set<Seat> seats;
 
-    public Showtime(Long id, LocalDateTime startTime, Movie movie, Theatre theatre) {
+    public Showtime(Long id, LocalDateTime startTime, Theatre theatre) {
         this.id = id;
         this.startTime = startTime;
-        this.movie = movie;
+//        this.movie = movie;
         this.theatre = theatre;
         for (int i = 1; i <= theatre.getSeatRows(); i++) {
             for (int j = 1; j <= theatre.getSeatCols(); j++) {
