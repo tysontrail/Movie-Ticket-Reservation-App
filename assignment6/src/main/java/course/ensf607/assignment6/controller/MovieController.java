@@ -18,10 +18,10 @@ public class MovieController {
         this.movieService = movieService;
     }
 
-//    @GetMapping({"/api/v1/searchmovie"})
-//    public Optional<Movie> searchAnnouncedMovie(@RequestParam String name){
-//        return this.movieService.searchAnnouncedMovie(name);
-//    }
+    @GetMapping({"/api/v1/searchannouncedmovies"})
+    public Optional<Movie> searchAnnouncedMovie(@RequestParam String name){
+        return this.movieService.searchAnnouncedMovies(name);
+    }
 
     @GetMapping({"/api/v1/searchallmovies"})
     public Optional<Movie> searchAllMovies(@RequestParam String name){

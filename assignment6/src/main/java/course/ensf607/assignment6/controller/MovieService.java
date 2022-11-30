@@ -35,7 +35,7 @@ public class MovieService {
 
     public Optional<Movie> searchAnnouncedMovies(String name){
         Iterable<Movie> movieList = getAnnouncedMovies();
-        Optional<Movie> foundMovie = movieRepository.findMovieByName(name);
+        Optional<Movie> foundMovie = null;
         for(Movie m: movieList){
             if(m.getName().equals(name) && m.getPublicStart().compareTo(LocalDate.now()) <= 0){
                 foundMovie = Optional.of(m);
