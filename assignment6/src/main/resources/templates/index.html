@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+  <head>
+    <meta charset="ISO-8859-1" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Login</title>
+  </head>
+  <body>
+    <h1>Welcome to the Movie Theatre Reservation App!</h1>
+    <h2>Login</h2>
+    <form action="#" th:action="@{/theatre-selection}">
+      <label for="username">Username:</label><br />
+      <input type="text" id="username" name="username" /><br />
+      <label for="password">Password:</label><br />
+      <input type="text" id="password" name="password" /><br />
+      <br />
+      <input type="submit" value="Submit" />
+    </form>
+    <ul>
+      <li>
+        <a th:href="@{/register}">Not registered? Click here to register</a>
+      </li>
+      <li><a th:href="@{theater-selection}">Continue as guest</a></li>
+    </ul>
+  </body>
+</html>
