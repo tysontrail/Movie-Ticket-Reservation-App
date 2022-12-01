@@ -1,6 +1,8 @@
 package course.ensf607.assignment6.controller;
 
+import course.ensf607.assignment6.entity.Movie;
 import course.ensf607.assignment6.entity.Theatre;
+import course.ensf607.assignment6.repository.MovieRepository;
 import course.ensf607.assignment6.repository.TheatreRepository;
 import org.springframework.stereotype.Service;
 
@@ -11,12 +13,15 @@ public class TheatreService {
 
     private final TheatreRepository theatreRepository;
 
-    public TheatreService(TheatreRepository theatreRepository){
+    private final MovieService movieService;
+
+    public TheatreService(TheatreRepository theatreRepository, MovieService movieService){
         this.theatreRepository = theatreRepository;
+        this.movieService = movieService;
     }
 
     public Optional<Theatre> searchTheatreByName(String name){
-        return this.searchTheatreByName(name);
+        return this.theatreRepository.findByName(name);
     }
 
     public Optional<Theatre> searchTheatreByID(long id){
@@ -42,6 +47,17 @@ public class TheatreService {
             throw new IllegalStateException("Theatre name already in database.");
         }
         this.theatreRepository.save(newTheatre);
+    }
+
+    public void addMovieToTheatre(Theatre theatre, String movieName){
+        Optional<Movie> addMovie= this.movieService.searchAllMovies(movieName);
+        if(addMovie.isPresent()){
+            theatre.addMovieToTheatre(addMovie);
+            theatreRepository.save(theatre);
+        }
+        else{
+            throw new IllegalStateException("Could not find movie.");
+        }
     }
 
     public void deleteTheatre(long id){

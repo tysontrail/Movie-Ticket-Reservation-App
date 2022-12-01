@@ -1,6 +1,8 @@
 package course.ensf607.assignment6.entity;
 
 import java.io.Serializable;
+import java.util.HashSet;
+import java.util.Optional;
 import java.util.Set;
 
 import javax.persistence.Column;
@@ -47,7 +49,7 @@ public class Theatre implements Serializable {
         name = "theatre_movies",
         joinColumns = @JoinColumn(name = "theatre_id"),
         inverseJoinColumns = @JoinColumn(name = "movie_id"))
-    private Set<Movie> movies;
+     private Set<Movie> movies = new HashSet<Movie>();
 
     public Theatre(Long id, String name, String address, int seatCols, int seatRows) {
         this.id = id;
@@ -62,6 +64,12 @@ public class Theatre implements Serializable {
         this.address = address;
         this.seatCols = seatCols;
         this.seatRows = seatRows;
+    }
+
+    public void addMovieToTheatre(Optional<Movie> movie){
+        if(movie.isPresent()){
+            movies.add(movie.get());
+        }
     }
 
 }
