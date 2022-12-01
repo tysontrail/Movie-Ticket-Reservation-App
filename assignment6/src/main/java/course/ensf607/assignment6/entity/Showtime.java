@@ -2,6 +2,8 @@ package course.ensf607.assignment6.entity;
 
 import java.io.Serializable;
 import java.time.LocalDateTime;
+import java.util.HashSet;
+import java.util.Optional;
 import java.util.Set;
 
 import javax.persistence.Column;
@@ -39,7 +41,7 @@ public class Showtime implements Serializable {
         name = "showtime_movies",
         joinColumns = @JoinColumn(name = "showtime_id"),
         inverseJoinColumns = @JoinColumn(name = "movie_id"))
-    private Set<Movie> showtimeToMovie;
+    private Set<Movie> showtimeToMovie = new HashSet<Movie>();
 
     @JsonIgnore
     @ManyToOne
@@ -61,5 +63,23 @@ public class Showtime implements Serializable {
         }
     }
 
+    public Showtime(LocalDateTime startTime, Theatre theatre) {
+        this.id = id;
+        this.startTime = startTime;
+        this.seats = new HashSet<>();
+//        this.movie = movie;
+        this.theatre = theatre;
+        for (int i = 1; i <= theatre.getSeatRows(); i++) {
+            for (int j = 1; j <= theatre.getSeatCols(); j++) {
+                seats.add(new Seat(this, i, j));
+            }
+        }
+    }
+
+    public void addMovieToShowtime(Optional<Movie> movie){
+        if(movie.isPresent()) {
+            showtimeToMovie.add(movie.get());
+        }
+    }
 }
 
