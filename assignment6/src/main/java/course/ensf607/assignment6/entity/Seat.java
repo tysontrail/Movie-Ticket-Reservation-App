@@ -36,36 +36,36 @@ public class Seat implements Serializable {
     @JoinColumn(name="showtime_id", nullable=false)
 	private Showtime showtime;
 
-    private int row;
+    private int seatRow;
 
-    private int column;
+    private int seatColumn;
 
     public Seat(Long id, Ticket ticket, Showtime showtime, int row, int column) {
         this.id = id;
         this.ticket = ticket;
         this.showtime = showtime;
-        this.row = row;
-        this.column = column;
+        this.seatRow = row;
+        this.seatColumn = column;
     }
 
     public Seat(Ticket ticket, Showtime showtime, int row, int column) {
         this.ticket = ticket;
         this.showtime = showtime;
-        this.row = row;
-        this.column = column;
+        this.seatRow = row;
+        this.seatColumn = column;
     }
 
     public Seat(Showtime showtime, int row, int column) {
         this.showtime = showtime;
-        this.row = row;
-        this.column = column;
+        this.seatRow = row;
+        this.seatColumn = column;
     }
 
     public Seat(Long id, Showtime showtime, int row, int column) {
         this.id = id;
         this.showtime = showtime;
-        this.row = row;
-        this.column = column;
+        this.seatRow = row;
+        this.seatColumn = column;
     }
 
 }
