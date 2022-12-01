@@ -6,16 +6,36 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Register</title>
   </head>
+  <style>
+    .error {
+      color: red;
+    }
+  </style>
   <body>
-    <h2>Register</h2>
-    <form action="#" th:action="@{/theatre-selection}">
-      <label for="username">Username:</label><br />
-      <input type="text" id="username" name="username" /><br />
-      <label for="password">Password:</label><br />
-      <input type="text" id="password" name="password" /><br />
-      <br />
+    <h2>User Registration</h2>
+    <form action="#" th:action="@{/register}" th:object="${user}" method="post">
+      <p>First Name: <input type="text" th:field="*{firstName}" /></p>
+      <p>Last Name: <input type="text" th:field="*{lastName}" /></p>
+      <p>Email: <input type="text" th:field="*{email}" /></p>
+      <p>Password: <input type="text" th:field="*{password}" /></p>
+      <p>Credit Card Number: <input type="text" th:field="*{creditCard}" /></p>
+      <p>Expiry Date: <input type="text" th:field="*{expiryDate}" /></p>
+      <p>CVC: <input type="text" th:field="*{cvcNumber}" /></p>
       <input type="submit" value="Submit" />
+      <div th:if="${#fields.hasAnyErrors()}">
+        <ul>
+          <li th:each="err : ${#fields.allErrors()}" th:text="${err}"></li>
+        </ul>
+      </div>
+      <div th:if="${#fields.hasErrors('global')}">
+        <li
+          th:each="err : ${#fields.errors('global')}"
+          th:text="${err}"
+          class="error"
+        ></li>
+      </div>
     </form>
+
     <ul>
       <li>
         <a th:href="@{/login}">Back to login</a>

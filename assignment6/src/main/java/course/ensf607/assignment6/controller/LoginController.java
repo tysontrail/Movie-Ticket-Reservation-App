@@ -1,19 +1,18 @@
-package com.movie.movie;
+package course.ensf607.assignment6.controller;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
+@RequestMapping(path = "/login")
 public class LoginController {
 
-  @GetMapping("/login")
+  @GetMapping
   public String login(Model model) {
-    return "index.html";
+    return "login.html";
   }
-
-  // @PostMapping("/login")
-  // public String checkLogin(Model model) {}
 
   @GetMapping("/register")
   public String register(Model model) {
