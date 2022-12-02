@@ -10,6 +10,7 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.ObjectError;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
@@ -31,20 +32,25 @@ public class RegisterViewController {
   }
 
   @PostMapping
-  public String registerSubmit(@Valid User user, BindingResult result, Model model) {
+  public String registerSubmit(
+      @Valid @ModelAttribute User user, BindingResult result, Model model) {
 
+    // Return form input errors
+    if (result.hasErrors()) {
+      return "register";
+    }
     // Check if submitted User object email already exists
     Optional<User> existingUser = userService.searchUserByUserName(user.getUserName());
 
-    if (!existingUser.isPresent()) {
+    if (existingUser.isPresent()) {
 
       // Throw error message and return to form
-      ObjectError error = new ObjectError("globalError", "Email belongs to existing user.");
+      ObjectError error = new ObjectError("globalError", "Username belongs to existing user.");
       result.addError(error);
-      return "/error/register";
+      return "register";
     }
     // Add user to the database
-    userService.addUser(user);
+    userService.registerUser(user);
 
     // Render results page
     model.addAttribute("user", user);

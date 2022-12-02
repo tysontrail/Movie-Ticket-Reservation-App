@@ -16,6 +16,7 @@
     <form action="#" th:action="@{/register}" th:object="${user}" method="post">
       <p>First Name: <input type="text" th:field="*{firstName}" /></p>
       <p>Last Name: <input type="text" th:field="*{lastName}" /></p>
+      <p>Username: <input type="text" th:field="*{userName}" /></p>
       <p>Email: <input type="text" th:field="*{email}" /></p>
       <p>Password: <input type="text" th:field="*{password}" /></p>
       <p>Credit Card Number: <input type="text" th:field="*{creditCard}" /></p>
@@ -24,7 +25,11 @@
       <input type="submit" value="Submit" />
       <div th:if="${#fields.hasAnyErrors()}">
         <ul>
-          <li th:each="err : ${#fields.allErrors()}" th:text="${err}"></li>
+          <li
+            th:each="err : ${#fields.allErrors()}"
+            th:text="${err}"
+            class="error"
+          ></li>
         </ul>
       </div>
       <div th:if="${#fields.hasErrors('global')}">

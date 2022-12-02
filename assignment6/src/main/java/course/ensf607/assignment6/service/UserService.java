@@ -29,6 +29,14 @@ public class UserService {
     this.userRepository.save(user);
   }
 
+  public void registerUser(User user) {
+    Optional<User> checkUser = searchUserByUserName(user.getUserName());
+    if (checkUser.isPresent()) {
+      throw new IllegalStateException("User ID already present in database.");
+    }
+    this.userRepository.save(user);
+  }
+
   // Same as above but for new users.
   public void addUser(
       String firstName,

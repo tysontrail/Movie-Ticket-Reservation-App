@@ -56,13 +56,16 @@ public class User implements Serializable {
   @NotEmpty(message = "Password cannot be empty.")
   private String password;
 
-  @NotEmpty(message = "Credit Card cannot be empty.")
+  // @NotNull(message = "Credit Card cannot be empty.")
+  // @Range(min = 16, max = 16, message = "Credit Card should be 16 digits.")
   private int creditCard;
 
-  @NotEmpty(message = "CVC Number cannot be empty.")
+  // @NotNull(message = "CVC cannot be empty.")
+  // @Range(min = 3, max = 3, message = "CVC should be 3 digits.")
   private int cvcNumber;
 
-  @NotEmpty(message = "Expiry Date cannot be empty.")
+  // @NotNull(message = "Expiry Date cannot be empty.")
+  // @Range(min = 4, max = 4, message = "Expiry Date should be 4 digits (MMYY)")
   private int expiryDate;
 
   private LocalDate annualRenewalDate;
