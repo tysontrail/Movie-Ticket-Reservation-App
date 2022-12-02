@@ -6,12 +6,12 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
-@RequestMapping(path = "/register")
+@RequestMapping(path = "/login")
 public class LoginViewController {
 
-  @GetMapping("/login")
+  @GetMapping
   public String login(Model model) {
-    return "index.html";
+    return "login.html";
   }
 
   @GetMapping("/register")
