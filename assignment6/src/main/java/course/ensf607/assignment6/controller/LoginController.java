@@ -17,19 +17,6 @@ public class LoginController {
     this.loginService = loginService;
   }
 
-  //  @GetMapping("/login")
-  //  public String login(Model model) {
-  //    return "index.html";
-  //  }
-
-  // @PostMapping("/login")
-  // public String checkLogin(Model model) {}
-
-  //  @GetMapping("/register")
-  //  public String register(Model model) {
-  //    return "register.html";
-  //  }
-
   @PostMapping("/api/v1/authenticate")
   public Optional<User> submitLogin(@RequestParam String username, @RequestParam String password) {
     return loginService.authenticate(username, password);

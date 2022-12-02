@@ -22,6 +22,20 @@ import lombok.Setter;
 @Table(name = "user")
 public class User implements Serializable {
 
+  private static User onlyInstance;
+
+  public static User getInstance() {
+    return onlyInstance;
+  }
+
+  public static void setInstance(User user) {
+    onlyInstance = user;
+  }
+
+  public static void setInstanceNull() {
+    onlyInstance = null;
+  }
+
   @Id
   @GeneratedValue(strategy = GenerationType.AUTO)
   @Column(name = "id")
