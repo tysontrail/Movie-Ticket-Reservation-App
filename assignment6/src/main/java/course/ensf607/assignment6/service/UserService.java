@@ -2,6 +2,7 @@ package course.ensf607.assignment6.service;
 
 import course.ensf607.assignment6.entity.User;
 import course.ensf607.assignment6.repository.UserRepository;
+import java.util.List;
 import java.util.Optional;
 import org.springframework.stereotype.Service;
 
@@ -32,13 +33,18 @@ public class UserService {
   public void addUser(
       String firstName,
       String lastName,
+      String userName,
       String email,
       String password,
       int creditCard,
       int cvcNumber,
       int expiryDate) {
     User newUser =
-        new User(firstName, lastName, email, password, creditCard, cvcNumber, expiryDate);
+        new User(firstName, lastName, userName, email, password, creditCard, cvcNumber, expiryDate);
+    Optional<User> matchingUserName = userRepository.findByUserName(userName);
+    if (matchingUserName.isPresent()) {
+      throw new IllegalStateException("Username already in database.");
+    }
     this.userRepository.save(newUser);
   }
 
@@ -46,8 +52,12 @@ public class UserService {
     return this.userRepository.findUserById(id);
   }
 
-  public Optional<User> searchUserByEmail(String email) {
-    return this.userRepository.findUserByEmail(email);
+  public List<User> searchUserByFirstNameAndLastName(String firstName, String lastName) {
+    return this.userRepository.findByFirstNameAndLastNameAllIgnoreCase(firstName, lastName);
+  }
+
+  public Optional<User> searchUserByUserName(String username) {
+    return this.userRepository.findByUserName(username);
   }
 
   public void deleteUserByID(long id) {

@@ -22,11 +22,13 @@ import lombok.Setter;
 @Table(name = "user")
 public class User implements Serializable {
 
-<<<<<<< HEAD
   @Id
   @GeneratedValue(strategy = GenerationType.AUTO)
   @Column(name = "id")
   private Long id;
+
+  @NotEmpty(message = "Username cannot be empty.")
+  private String userName;
 
   @NotEmpty(message = "First name cannot be empty.")
   private String firstName;
@@ -61,6 +63,7 @@ public class User implements Serializable {
       Long id,
       String firstName,
       String lastName,
+      String userName,
       String email,
       String password,
       int creditCard,
@@ -69,6 +72,7 @@ public class User implements Serializable {
     this.id = id;
     this.firstName = firstName;
     this.lastName = lastName;
+    this.userName = userName;
     this.email = email;
     this.password = password;
     this.creditCard = creditCard;
@@ -79,6 +83,7 @@ public class User implements Serializable {
   public User(
       String firstName,
       String lastName,
+      String userName,
       String email,
       String password,
       int creditCard,
@@ -86,65 +91,11 @@ public class User implements Serializable {
       int expiryDate) {
     this.firstName = firstName;
     this.lastName = lastName;
+    this.userName = userName;
     this.email = email;
     this.password = password;
     this.creditCard = creditCard;
     this.cvcNumber = cvcNumber;
     this.expiryDate = expiryDate;
   }
-=======
-	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
-	@Column(name = "id")
-	private Long id;
-
-    private String userName;
-
-	private String firstName;
-
-    private String lastName;
-
-	private String email;
-
-	private String password;
-
-    private int creditCard;
-
-    private int cvcNumber;
-
-    private int expiryDate;
-
-    private LocalDate annualRenewalDate;
-
-    @OneToMany(mappedBy="user")
-    private Set<Ticket> tickets;
-
-    @OneToMany(mappedBy="user")
-    private Set<Payment> payments;
-
-    public User(Long id, String firstName, String lastName, String userName, String email, String password, int creditCard,
-            int cvcNumber, int expiryDate) {
-        this.id = id;
-        this.firstName = firstName;
-        this.lastName = lastName;
-        this.userName = userName;
-        this.email = email;
-        this.password = password;
-        this.creditCard = creditCard;
-        this.cvcNumber = cvcNumber;
-        this.expiryDate = expiryDate;
-    }
-
-    public User(String firstName, String lastName, String userName, String email, String password, int creditCard, int cvcNumber,
-            int expiryDate) {
-        this.firstName = firstName;
-        this.lastName = lastName;
-        this.userName = userName;
-        this.email = email;
-        this.password = password;
-        this.creditCard = creditCard;
-        this.cvcNumber = cvcNumber;
-        this.expiryDate = expiryDate;
-    }
->>>>>>> 9d09d8b6107a2af8500f44a39339f3331d334073
 }

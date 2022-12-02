@@ -11,6 +11,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
@@ -25,7 +26,6 @@ import lombok.Setter;
 @Table(name = "showtime")
 public class Showtime implements Serializable {
 
-<<<<<<< HEAD
   @Id
   @GeneratedValue(strategy = GenerationType.AUTO)
   @Column(name = "id")
@@ -33,12 +33,12 @@ public class Showtime implements Serializable {
 
   private LocalDateTime startTime;
 
-  @ManyToOne
+  @ManyToMany
   @JoinTable(
       name = "showtime_movies",
       joinColumns = @JoinColumn(name = "showtime_id"),
       inverseJoinColumns = @JoinColumn(name = "movie_id"))
-  private Movie movie;
+  private Set<Movie> showtimeToMovie;
 
   @JsonIgnore
   @ManyToOne
@@ -48,49 +48,15 @@ public class Showtime implements Serializable {
   @OneToMany(mappedBy = "showtime")
   private Set<Seat> seats;
 
-  public Showtime(Long id, LocalDateTime startTime, Movie movie, Theatre theatre) {
+  public Showtime(Long id, LocalDateTime startTime, Theatre theatre) {
     this.id = id;
     this.startTime = startTime;
-    this.movie = movie;
+    //        this.movie = movie;
     this.theatre = theatre;
     for (int i = 1; i <= theatre.getSeatRows(); i++) {
       for (int j = 1; j <= theatre.getSeatCols(); j++) {
         seats.add(new Seat(this, i, j));
       }
-=======
-	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
-	@Column(name = "id")
-	private Long id;
-
-    private LocalDateTime startTime;
-
-    @ManyToMany
-    @JoinTable(
-        name = "showtime_movies",
-        joinColumns = @JoinColumn(name = "showtime_id"),
-        inverseJoinColumns = @JoinColumn(name = "movie_id"))
-    private Set<Movie> showtimeToMovie;
-
-    @JsonIgnore
-    @ManyToOne
-    @JoinColumn(name="theatre_id", nullable=false)
-	private Theatre theatre;
-
-    @OneToMany(mappedBy="showtime")
-    private Set<Seat> seats;
-
-    public Showtime(Long id, LocalDateTime startTime, Theatre theatre) {
-        this.id = id;
-        this.startTime = startTime;
-//        this.movie = movie;
-        this.theatre = theatre;
-        for (int i = 1; i <= theatre.getSeatRows(); i++) {
-            for (int j = 1; j <= theatre.getSeatCols(); j++) {
-                seats.add(new Seat(this, i, j));
-            }
-        }
->>>>>>> 9d09d8b6107a2af8500f44a39339f3331d334073
     }
   }
 }

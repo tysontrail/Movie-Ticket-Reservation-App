@@ -34,7 +34,7 @@ public class RegisterController {
   public String registerSubmit(@Valid User user, BindingResult result, Model model) {
 
     // Check if submitted User object email already exists
-    Optional<User> existingUser = userService.searchUserByEmail(user.getEmail());
+    Optional<User> existingUser = userService.searchUserByUserName(user.getUserName());
 
     if (!existingUser.isPresent()) {
 
