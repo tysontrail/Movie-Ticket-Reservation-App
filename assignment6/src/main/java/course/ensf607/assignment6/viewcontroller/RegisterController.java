@@ -1,4 +1,4 @@
-package course.ensf607.assignment6.controller;
+package course.ensf607.assignment6.viewcontroller;
 
 import course.ensf607.assignment6.entity.User;
 import course.ensf607.assignment6.service.UserService;

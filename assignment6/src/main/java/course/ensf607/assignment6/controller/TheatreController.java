@@ -1,6 +1,5 @@
 package course.ensf607.assignment6.controller;
 
-import course.ensf607.assignment6.entity.Movie;
 import course.ensf607.assignment6.entity.Theatre;
 import course.ensf607.assignment6.service.TheatreService;
 import java.util.Optional;
@@ -49,5 +48,12 @@ public class TheatreController {
   }
 
   @PostMapping({"/api/v1/addmovietotheatre"})
-  public void addTheatreToMovie(Movie movie) {}
+  public void addMovieToTheatre(@RequestParam String theatreName, @RequestParam String movieName) {
+    Optional<Theatre> theTheatre = theatreService.searchTheatreByName("Canyon Meadows Theatre");
+    if (theTheatre.isPresent()) {
+      this.theatreService.addMovieToTheatre(theTheatre.get(), movieName);
+    } else {
+      throw new IllegalStateException("Could not find theatre.");
+    }
+  }
 }
