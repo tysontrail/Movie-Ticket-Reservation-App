@@ -15,12 +15,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
 @RequestMapping(path = "/register")
-public class RegisterController {
+public class RegisterViewController {
 
   private final UserService userService;
 
   @Autowired
-  public RegisterController(UserService userService) {
+  public RegisterViewController(UserService userService) {
     this.userService = userService;
   }
 
