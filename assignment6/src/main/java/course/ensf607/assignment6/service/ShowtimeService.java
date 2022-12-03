@@ -1,4 +1,4 @@
-package course.ensf607.assignment6.controller;
+package course.ensf607.assignment6.service;
 
 import course.ensf607.assignment6.entity.Movie;
 import course.ensf607.assignment6.entity.Showtime;

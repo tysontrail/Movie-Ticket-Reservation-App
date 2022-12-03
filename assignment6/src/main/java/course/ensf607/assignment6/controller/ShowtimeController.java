@@ -1,7 +1,7 @@
 package course.ensf607.assignment6.controller;
 
-import com.fasterxml.jackson.annotation.JsonFormat;
 import course.ensf607.assignment6.entity.Showtime;
+import course.ensf607.assignment6.service.ShowtimeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.web.bind.annotation.*;
