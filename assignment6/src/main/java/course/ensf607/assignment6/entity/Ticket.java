@@ -1,6 +1,7 @@
 package course.ensf607.assignment6.entity;
 
 import java.io.Serializable;
+import java.time.LocalDateTime;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -25,6 +26,19 @@ import lombok.Setter;
 @Table(name = "ticket")
 public class Ticket implements Serializable {
 
+    private static Ticket ticketInstance;
+
+    public static Ticket getInstance(){
+        if(ticketInstance == null){
+            ticketInstance = new Ticket();
+        }
+        return ticketInstance;
+    }
+
+    public static void setInstance(Ticket ticket){
+        ticketInstance = ticket;
+    }
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	@Column(name = "id")
@@ -32,13 +46,23 @@ public class Ticket implements Serializable {
 
     @JsonIgnore
     @ManyToOne
-    @JoinColumn(name="user_id", nullable=false)
+    @JoinColumn(name="user_id", nullable=true)
     private User user;
 
     @JsonIgnore
     @ManyToOne
-    @JoinColumn(name="theatre_id", nullable=false)
+    @JoinColumn(name="theatre_id", nullable=true)
 	private Theatre theatre;
+
+    /**Movie name string for info purposes and for cancellation/voucher checking.
+     * Don't need to have database relationship because it's nullable.
+     */
+    private String movieName;
+
+    /**Movie name string for info purposes and for cancellation/voucher checking.
+     * Don't need to have database relationship because it's nullable
+     */
+    private LocalDateTime showtime;
 
     @JsonIgnore
     @OneToOne(mappedBy = "ticket", cascade = CascadeType.ALL)
