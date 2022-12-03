@@ -115,4 +115,9 @@ public class User implements Serializable {
     this.cvcNumber = cvcNumber;
     this.expiryDate = expiryDate;
   }
+
+  public User(String userName, String password) {
+    this.userName = userName;
+    this.password = password;
+  }
 }

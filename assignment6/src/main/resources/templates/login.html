@@ -6,22 +6,45 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Login</title>
   </head>
+  <style>
+    .error {
+      color: red;
+    }
+  </style>
   <body>
     <h1>Welcome to the Movie Theatre Reservation App!</h1>
     <h2>Login</h2>
-    <form action="#" th:action="@{/theatre-selection}">
-      <label for="username">Username (Email):</label><br />
-      <input type="text" id="username" name="username" /><br />
-      <label for="password">Password:</label><br />
-      <input type="text" id="password" name="password" /><br />
-      <br />
+    <form action="#" th:action="@{/login}" th:object="${user}" method="post">
+      <p>
+        Username: <input type="text" th:field="*{userName}" id="userName" />
+      </p>
+      <p
+        th:if="${#fields.hasErrors('userName')}"
+        th:errorclass="error"
+        th:errors="*{userName}"
+      />
+      <p>
+        Password: <input type="text" th:field="*{password}" id="password" />
+      </p>
+      <p
+        th:if="${#fields.hasErrors('password')}"
+        th:errorclass="error"
+        th:errors="*{password}"
+      />
       <input type="submit" value="Submit" />
+      <div th:if="${#fields.hasErrors('global')}">
+        <li
+          th:each="err : ${#fields.errors('global')}"
+          th:text="${err}"
+          class="error"
+        ></li>
+      </div>
     </form>
     <ul>
       <li>
         <a th:href="@{/register}">Not registered? Click here to register</a>
       </li>
-      <li><a th:href="@{theater-selection}">Continue as guest</a></li>
+      <li><a th:href="@{/theatre}">Continue as guest</a></li>
     </ul>
   </body>
 </html>

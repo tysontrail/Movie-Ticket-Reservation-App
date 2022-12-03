@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+  <head>
+    <meta charset="ISO-8859-1" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Theatre Selection</title>
+  </head>
+  <style>
+    .error {
+      color: red;
+    }
+  </style>
+  <body>
+    <h1>Please select a Theatre</h1>
+    <h2>Theatres</h2>
+    <tbody>
+      <tr th:each="theatre : ${theatres}">
+        <td th:text="${theatre.name}"></td>
+        <td th:text="${theatre.address}"></td>
+      </tr>
+    </tbody>
+    <ul>
+      <li>
+        <a th:href="@{/login}">Home</a>
+      </li>
+    </ul>
+  </body>
+</html>
