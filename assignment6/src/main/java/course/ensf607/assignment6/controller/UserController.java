@@ -72,4 +72,9 @@ public class UserController {
   public Optional<User> findUserByUserName(String userName) {
     return this.userService.searchUserByUserName(userName);
   }
+
+  @PostMapping({"api/v1/addusertoticket"})
+  public void addUserToTicket(@RequestParam long userId, @RequestParam long ticketId){
+    this.userService.addTicketToUser(userId, ticketId);
+  }
 }

@@ -30,10 +30,16 @@ public class TheatreController {
     return this.theatreService.searchTheatreByName(name);
   }
 
-  // Not yet implemented.
+  // The object version
+//  @PostMapping({"/api/v1/selecttheatre"})
+//  public void selectTheatre(@RequestBody Theatre theTheatre) {
+//    this.theatreService.selectTheatre(theTheatre);
+//  }
+
+  // The string then find it version
   @PostMapping({"/api/v1/selecttheatre"})
-  public void selectTheatre(@RequestBody Theatre theTheatre) {
-    this.theatreService.selectTheatre(theTheatre);
+  public void selectTheatre(@RequestParam String theatreName) {
+    this.theatreService.selectTheatre(theatreName);
   }
 
   @PostMapping({"/api/v1/addtheatre"})
