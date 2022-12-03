@@ -2,20 +2,26 @@ package course.ensf607.assignment6.service;
 
 import course.ensf607.assignment6.entity.Movie;
 import course.ensf607.assignment6.entity.Theatre;
+import course.ensf607.assignment6.entity.Ticket;
 import course.ensf607.assignment6.repository.TheatreRepository;
 import java.util.Optional;
+
+import course.ensf607.assignment6.repository.TicketRepository;
 import org.springframework.stereotype.Service;
 
 @Service
 public class TheatreService {
 
+  private final TicketRepository ticketRepository;
+
   private final TheatreRepository theatreRepository;
 
   private final MovieService movieService;
 
-  public TheatreService(TheatreRepository theatreRepository, MovieService movieService) {
+  public TheatreService(TheatreRepository theatreRepository, MovieService movieService, TicketRepository ticketRepository) {
     this.theatreRepository = theatreRepository;
     this.movieService = movieService;
+    this.ticketRepository = ticketRepository;
   }
 
   public Optional<Theatre> searchTheatreByName(String name) {
@@ -26,9 +32,24 @@ public class TheatreService {
     return this.theatreRepository.findTheatreById(id);
   }
 
+  //Body-object version
   public void selectTheatre(Theatre selectedTheatre) {
-    // TODO: include logic for storing the theatre in the ticket.
-    // Needs to get stored in ticket.
+    Ticket theTicket = Ticket.getInstance();
+    theTicket.setTheatre(selectedTheatre);
+  }
+
+  //String name then find it edition.
+  public void selectTheatre(String theatreName) {
+    Optional<Theatre> selectedTheatre = theatreRepository.findByName(theatreName);
+    if(selectedTheatre.isPresent()){
+      Ticket theTicket = Ticket.getInstance();
+      theTicket.setTheatre(selectedTheatre.get());
+      this.ticketRepository.save(theTicket);
+
+    }
+    else{
+      throw new IllegalStateException("Could not find theatre.");
+    }
   }
 
   public void addTheatre(Theatre theatre) {

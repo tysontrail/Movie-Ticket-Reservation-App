@@ -1,6 +1,8 @@
 package course.ensf607.assignment6.service;
 
+import course.ensf607.assignment6.entity.Ticket;
 import course.ensf607.assignment6.entity.User;
+import course.ensf607.assignment6.repository.TicketRepository;
 import course.ensf607.assignment6.repository.UserRepository;
 import java.util.List;
 import java.util.Optional;
@@ -12,8 +14,11 @@ public class UserService {
   /** Aggregate the user repository for changes. */
   private final UserRepository userRepository;
 
-  public UserService(UserRepository userRepository) {
+  private final TicketRepository ticketRepository;
+
+  public UserService(UserRepository userRepository, TicketRepository ticketRepository) {
     this.userRepository = userRepository;
+    this.ticketRepository = ticketRepository;
   }
 
   /**
@@ -44,7 +49,7 @@ public class UserService {
       String userName,
       String email,
       String password,
-      int creditCard,
+      long creditCard,
       int cvcNumber,
       int expiryDate) {
     User newUser =
@@ -54,6 +59,16 @@ public class UserService {
       throw new IllegalStateException("Username already in database.");
     }
     this.userRepository.save(newUser);
+  }
+
+  public void addTicketToUser(long userId, long ticketId){
+    Optional<User> user = userRepository.findUserById(userId);
+    if(!user.isPresent()){
+      throw new IllegalStateException("Could not find user Id.");
+    }
+    Ticket ticket = Ticket.getInstance();
+    user.get().addTicket(ticket);
+    ticketRepository.save(ticket);
   }
 
   public Optional<User> searchUserByID(long id) {

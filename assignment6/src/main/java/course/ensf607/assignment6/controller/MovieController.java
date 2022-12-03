@@ -27,9 +27,14 @@ public class MovieController {
     return this.movieService.searchAllMovies(name);
   }
 
+//  @PostMapping({"/api/v1/selectmovie"})
+//  public void selectMovie(@RequestBody Movie theMovie) {
+//    this.movieService.selectMovie(theMovie);
+//  }
+
   @PostMapping({"/api/v1/selectmovie"})
-  public void selectMovie(@RequestBody Movie theMovie) {
-    this.movieService.selectMovie(theMovie);
+  public void selectMovie(@RequestParam String movieName) {
+    this.movieService.selectMovie(movieName);
   }
 
   @PostMapping({"/api/v1/addmovie"})

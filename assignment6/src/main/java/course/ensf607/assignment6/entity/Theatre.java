@@ -71,6 +71,5 @@ public class Theatre implements Serializable {
             movies.add(movie.get());
         }
     }
-
 }
 

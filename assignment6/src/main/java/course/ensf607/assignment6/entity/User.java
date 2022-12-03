@@ -2,6 +2,7 @@ package course.ensf607.assignment6.entity;
 
 import java.io.Serializable;
 import java.time.LocalDate;
+import java.util.HashSet;
 import java.util.Set;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -58,7 +59,7 @@ public class User implements Serializable {
 
   // @NotNull(message = "Credit Card cannot be empty.")
   // @Range(min = 16, max = 16, message = "Credit Card should be 16 digits.")
-  private int creditCard;
+  private long creditCard;
 
   // @NotNull(message = "CVC cannot be empty.")
   // @Range(min = 3, max = 3, message = "CVC should be 3 digits.")
@@ -71,10 +72,10 @@ public class User implements Serializable {
   private LocalDate annualRenewalDate;
 
   @OneToMany(mappedBy = "user")
-  private Set<Ticket> tickets;
+  private Set<Ticket> tickets = new HashSet<>();
 
   @OneToMany(mappedBy = "user")
-  private Set<Payment> payments;
+  private Set<Payment> payments = new HashSet<>();
 
   public User(
       Long id,
@@ -83,7 +84,7 @@ public class User implements Serializable {
       String userName,
       String email,
       String password,
-      int creditCard,
+      long creditCard,
       int cvcNumber,
       int expiryDate) {
     this.id = id;
@@ -103,7 +104,7 @@ public class User implements Serializable {
       String userName,
       String email,
       String password,
-      int creditCard,
+      long creditCard,
       int cvcNumber,
       int expiryDate) {
     this.firstName = firstName;
@@ -119,5 +120,10 @@ public class User implements Serializable {
   public User(String userName, String password) {
     this.userName = userName;
     this.password = password;
+  }
+
+  public void addTicket(Ticket ticket) {
+    ticket.setUser(this);
+    tickets.add(ticket);
   }
 }
