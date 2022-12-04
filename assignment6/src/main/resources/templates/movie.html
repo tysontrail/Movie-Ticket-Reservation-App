@@ -10,7 +10,7 @@
       integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
       crossorigin="anonymous"
     />
-    <title>Theatre Selection</title>
+    <title>Movie Selection</title>
   </head>
   <style>
     .error {
@@ -18,29 +18,29 @@
     }
   </style>
   <body>
-    <h1>Theatres</h1>
-    <h2>Please select a Theatre</h2>
+    <h1>Movies</h1>
+    <h2>Please select a Movie</h2>
     <table class="table">
       <thead>
         <tr>
-          <th scope="col">Theatre Name</th>
-          <th scope="col">Theatre Address</th>
+          <th scope="col">Movie Name</th>
+          <th scope="col">Movie Description</th>
           <th scope="col">Selection</th>
         </tr>
       </thead>
       <tbody>
-        <tr th:each="theatre : ${theatres}">
-          <td th:text="${theatre.name}"></td>
-          <td th:text="${theatre.address}"></td>
+        <tr th:each="movie : ${movies}">
+          <td th:text="${movie.name}"></td>
+          <td th:text="${movie.description}"></td>
           <td>
             <a
-              th:href="@{/showtime(movieName = ${movieName})}"
+              th:href="@{/theatre(movieName=${movie.name})}"
               class="btn btn-primary"
-              >Select Theatre</a
+              >Select Movie</a
             >
           </td>
+          <br />
         </tr>
-        <br />
       </tbody>
     </table>
     <ul>

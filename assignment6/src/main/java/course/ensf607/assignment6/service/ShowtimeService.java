@@ -6,8 +6,6 @@ import course.ensf607.assignment6.entity.Theatre;
 import course.ensf607.assignment6.entity.Ticket;
 import course.ensf607.assignment6.repository.ShowtimeRepository;
 import course.ensf607.assignment6.repository.TicketRepository;
-import course.ensf607.assignment6.service.MovieService;
-import course.ensf607.assignment6.service.TheatreService;
 import java.time.LocalDateTime;
 import java.util.Optional;
 import org.springframework.stereotype.Service;
@@ -18,7 +16,8 @@ public class ShowtimeService {
   private final TheatreService theatreService;
   private final MovieService movieService;
   private final ShowtimeRepository showtimeRepository;
-  //TODO: May need to delete the ticket repositories after testing is complete and everything is working.
+  // TODO: May need to delete the ticket repositories after testing is complete and everything is
+  // working.
   private final TicketRepository ticketRepository;
 
   public ShowtimeService(
@@ -32,24 +31,23 @@ public class ShowtimeService {
     this.ticketRepository = ticketRepository;
   }
 
-  //Showtime object version
+  // Showtime object version
   public void selectShowtime(Showtime showtime) {
     Ticket theTicket = Ticket.getInstance();
-    //Probably have to find showtime by id because of the relationships.
+    // Probably have to find showtime by id because of the relationships.
     Optional<Showtime> theShowtime = showtimeRepository.findById(showtime.getId());
-    if(theShowtime.isPresent()){
+    if (theShowtime.isPresent()) {
       theTicket.setShowtime(showtime.getStartTime());
       this.ticketRepository.save(theTicket);
-    }
-    else{
+    } else {
       throw new IllegalStateException("Could not find showtime.");
     }
   }
 
-  //Showtime Id version
+  // Showtime Id version
   public void selectShowtime(long showtimeId) {
     Ticket theTicket = Ticket.getInstance();
-    //Probably have to find showtime by id because of the relationships.
+    // Probably have to find showtime by id because of the relationships.
     Optional<Showtime> theShowtime = showtimeRepository.findById(showtimeId);
     if (theShowtime.isPresent()) {
       theTicket.setShowtime(theShowtime.get().getStartTime());
@@ -96,4 +94,8 @@ public class ShowtimeService {
   public void deleteShowtime(long id) {
     this.showtimeRepository.deleteById(id);
   }
+
+  // public Optional<Showtime> Showtime findShowtimeById(long id){
+  //   return this.showtimeRepository.findById(id);
+  // }
 }

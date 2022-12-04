@@ -23,18 +23,29 @@ import lombok.Setter;
 @Table(name = "user")
 public class User implements Serializable {
 
-  private static User onlyInstance;
+  private static User onlyInstance = null;
+  private static boolean loggedIn = false;
+
+  public static boolean isLoggedIn() {
+    return loggedIn;
+  }
+
+  public static void setLoggedIn(boolean loggedIn) {
+    User.loggedIn = loggedIn;
+  }
 
   public static User getInstance() {
     return onlyInstance;
   }
 
   public static void setInstance(User user) {
-    onlyInstance = user;
+    User.onlyInstance = user;
+    setLoggedIn(true);
   }
 
   public static void setInstanceNull() {
-    onlyInstance = null;
+    User.onlyInstance = null;
+    setLoggedIn(false);
   }
 
   @Id
@@ -115,11 +126,6 @@ public class User implements Serializable {
     this.creditCard = creditCard;
     this.cvcNumber = cvcNumber;
     this.expiryDate = expiryDate;
-  }
-
-  public User(String userName, String password) {
-    this.userName = userName;
-    this.password = password;
   }
 
   public void addTicket(Ticket ticket) {

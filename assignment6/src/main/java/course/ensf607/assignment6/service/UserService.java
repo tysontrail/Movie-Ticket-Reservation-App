@@ -61,9 +61,9 @@ public class UserService {
     this.userRepository.save(newUser);
   }
 
-  public void addTicketToUser(long userId, long ticketId){
+  public void addTicketToUser(long userId, long ticketId) {
     Optional<User> user = userRepository.findUserById(userId);
-    if(!user.isPresent()){
+    if (!user.isPresent()) {
       throw new IllegalStateException("Could not find user Id.");
     }
     Ticket ticket = Ticket.getInstance();
