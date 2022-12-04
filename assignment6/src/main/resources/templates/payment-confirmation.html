@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+  <head>
+    <meta charset="ISO-8859-1" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css"
+      integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
+      crossorigin="anonymous"
+    />
+    <title>Payment Confirmation</title>
+  </head>
+  <body>
+    <h2>Payment Confirmation</h2>
+    <p th:text="'First Name: ' + ${user.firstName}" />
+    <p th:text="'Last Name: ' + ${user.lastName}" />
+    <p th:text="'Email: ' + ${user.email}" />
+    <p th:text="'Last Name: ' + ${user.lastName}" />
+    <p th:text="'Credit Card: ' + ${user.creditCard}" />
+    <p th:text="'CVC: ' + ${user.cvcNumber}" />
+    <p th:text="'Expiry Date: ' + ${user.expiryDate}" />
+    <p th:text="'CVC: ' + ${user.cvcNumber}" />
+    <p th:text="'Movie: ' + ${movie.name}" />
+    <p th:text="'Theatre: + ${theatre.name}"/>
+    <p th:text="'Showtime: + ${showtime.name}"/>
+    <table class="table">
+      <thead>
+        <tr>
+          <th scope="col">Row</th>
+          <th scope="col">Number</th>
+        </tr>
+      </thead>
+    <tbody>
+      <tr>
+        <td th:text="${seat.row}"></td>
+        <td th:text="${seat.column}"></td>
+        <br />
+      </tr>
+      </tbody>
+      </table>
+      <a th:href="#" class="btn btn-primary"
+      >Submit</a
+    >
+      <li>
+        <a th:href="@{/login}">Back to login</a>
+      </li>
+    </ul>
+  </body>
+</html>
