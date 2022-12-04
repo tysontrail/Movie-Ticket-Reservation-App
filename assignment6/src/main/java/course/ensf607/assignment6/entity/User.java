@@ -23,7 +23,7 @@ import lombok.Setter;
 @Table(name = "user")
 public class User implements Serializable {
 
-  private static User onlyInstance;
+  protected static User onlyInstance;
 
   public static User getInstance() {
     return onlyInstance;
@@ -46,30 +46,32 @@ public class User implements Serializable {
   private String userName;
 
   @NotEmpty(message = "First name cannot be empty.")
-  private String firstName;
+  protected String firstName;
 
   @NotEmpty(message = "Last name cannot be empty.")
-  private String lastName;
+  protected String lastName;
 
   @NotEmpty(message = "Email cannot be empty.")
-  private String email;
+  protected String email;
 
   @NotEmpty(message = "Password cannot be empty.")
-  private String password;
+  protected String password;
 
   // @NotNull(message = "Credit Card cannot be empty.")
   // @Range(min = 16, max = 16, message = "Credit Card should be 16 digits.")
-  private long creditCard;
+  protected long creditCard;
 
   // @NotNull(message = "CVC cannot be empty.")
   // @Range(min = 3, max = 3, message = "CVC should be 3 digits.")
-  private int cvcNumber;
+  protected int cvcNumber;
 
   // @NotNull(message = "Expiry Date cannot be empty.")
   // @Range(min = 4, max = 4, message = "Expiry Date should be 4 digits (MMYY)")
-  private int expiryDate;
+  protected int expiryDate;
 
   private LocalDate annualRenewalDate;
+
+  private boolean paidAnnualFee;
 
   @OneToMany(mappedBy = "user")
   private Set<Ticket> tickets = new HashSet<>();
@@ -96,6 +98,8 @@ public class User implements Serializable {
     this.creditCard = creditCard;
     this.cvcNumber = cvcNumber;
     this.expiryDate = expiryDate;
+    this.annualRenewalDate = LocalDate.now();
+    this.paidAnnualFee = false;
   }
 
   public User(
@@ -115,6 +119,8 @@ public class User implements Serializable {
     this.creditCard = creditCard;
     this.cvcNumber = cvcNumber;
     this.expiryDate = expiryDate;
+    this.annualRenewalDate = LocalDate.now();
+    this.paidAnnualFee = false;
   }
 
   public void addTicket(Ticket ticket){
