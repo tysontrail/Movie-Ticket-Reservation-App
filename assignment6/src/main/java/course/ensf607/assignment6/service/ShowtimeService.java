@@ -1,6 +1,7 @@
 package course.ensf607.assignment6.service;
 
 import course.ensf607.assignment6.entity.Movie;
+import course.ensf607.assignment6.entity.Seat;
 import course.ensf607.assignment6.entity.Showtime;
 import course.ensf607.assignment6.entity.Theatre;
 import course.ensf607.assignment6.entity.Ticket;
@@ -64,6 +65,11 @@ public class ShowtimeService {
 
   public Iterable<Showtime> getAllMovieShowtimes(String movieName) {
     return showtimeRepository.findAllShowtimesByMovie(movieName);
+  }
+
+  public Iterable<Seat> getShowtimeSeats(Long showtimeId) {
+    Optional<Showtime> showtime = showtimeRepository.findById(showtimeId);
+    return showtime.get().getSeats();
   }
 
   public void addShowtimeToTheatre(LocalDateTime startTime, Theatre theatre) {
