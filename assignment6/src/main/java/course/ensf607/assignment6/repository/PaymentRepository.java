@@ -1,5 +1,7 @@
 package course.ensf607.assignment6.repository;
 
-public class PaymentRepository {
-    
+import course.ensf607.assignment6.entity.Payment;
+import org.springframework.data.jpa.repository.JpaRepository;
+
+public interface PaymentRepository extends JpaRepository<Payment, Long> {
 }

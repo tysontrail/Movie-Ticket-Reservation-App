@@ -92,6 +92,11 @@ public class Ticket implements Serializable {
         this.payment = payment;
         this.balance = balance;
     }
+    public Ticket(Theatre theatre, Seat seat) {
+        this.theatre = theatre;
+        this.seat = seat;
+    }
+
 
 }
 

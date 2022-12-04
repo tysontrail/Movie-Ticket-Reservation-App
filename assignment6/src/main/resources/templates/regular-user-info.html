@@ -10,7 +10,7 @@
       integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
       crossorigin="anonymous"
     />
-    <title>Register</title>
+    <title>Payment Info</title>
   </head>
   <style>
     .error {
@@ -18,11 +18,11 @@
     }
   </style>
   <body>
-    <h2>User Registration</h2>
+    <h2>User Payment Info</h2>
     <div class="form">
       <form
         action="#"
-        th:action="@{/register}"
+        th:action="@{/payment}"
         th:object="${user}"
         method="post"
       >
@@ -30,9 +30,7 @@
           First Name: <input type="text" th:field="*{firstName}" required />
         </p>
         <p>Last Name: <input type="text" th:field="*{lastName}" required /></p>
-        <p>Username: <input type="text" th:field="*{userName}" required /></p>
         <p>Email: <input type="email" th:field="*{email}" required /></p>
-        <p>Password: <input type="text" th:field="*{password}" required /></p>
         <p>
           Credit Card Number:
           <input type="number" th:field="*{creditCard}" required />

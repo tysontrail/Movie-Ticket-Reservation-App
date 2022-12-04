@@ -20,7 +20,7 @@ public class TicketService {
         return this.ticketRepository.findTicketById(id);
     }
 
-    public Optional<Ticket> cancelTicket(Long id){
+    public Optional<Ticket> cancelRegisteredUserTicket(Long id){
         Optional<Ticket> ticket = this.ticketRepository.findTicketById(id);
         if(ticket.isPresent()){
             ticket.get().setMovieName("cancelled");
@@ -34,7 +34,31 @@ public class TicketService {
         }
     }
 
+    public Optional<Ticket> cancelRegularUserTicket(Long id){
+        Optional<Ticket> ticket = this.ticketRepository.findTicketById(id);
+        if(ticket.isPresent()){
+            ticket.get().setMovieName("cancelled");
+            ticket.get().setShowtime(null);
+            ticket.get().setTheatre(null);
+            double newBalance = ticket.get().getBalance() * 0.85;
+            ticket.get().setBalance(newBalance);
+            this.ticketRepository.save(ticket.get());
+            return ticket;
+        }
+        else{
+            throw new IllegalStateException("Ticket could not be cancelled.");
+        }
+    }
+
 //    public Ticket createTicket(){
 //        return new Ticket();
 //    }
+
+public void addTicket(Ticket ticket) {
+    Optional<Ticket> checkTicket = searchTicketById(ticket.getId());
+    if (checkTicket.isPresent()) {
+      throw new IllegalStateException("Ticket ID already present in database.");
+    }
+    this.ticketRepository.save(ticket);
+  }
 }

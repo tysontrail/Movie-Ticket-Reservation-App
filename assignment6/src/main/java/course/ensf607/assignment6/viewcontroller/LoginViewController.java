@@ -2,7 +2,7 @@ package course.ensf607.assignment6.viewcontroller;
 
 import course.ensf607.assignment6.entity.User;
 import course.ensf607.assignment6.service.UserService;
-import javax.validation.Valid;
+import course.ensf607.assignment6.viewforms.LoginForm;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -26,9 +26,18 @@ public class LoginViewController {
 
   @GetMapping
   public String login(Model model) {
-    model.addAttribute("user", new User());
+    User.setInstanceNull();
+    model.addAttribute("loginForm", new LoginForm());
     return "login";
   }
+
+  // @GetMapping("/logout")
+  // public String logout(Model model) {
+  //   // Removes user instance
+
+  //   model.addAttribute("loginForm", new LoginForm());
+  //   return "login";
+  // }
 
   @GetMapping("/register")
   public String register(Model model) {
@@ -36,14 +45,12 @@ public class LoginViewController {
   }
 
   @PostMapping
-  public String loginSubmit(@Valid @ModelAttribute User user, BindingResult result, Model model) {
-    // Return form input errors
-    if (result.hasErrors()) {
-      return "login";
-    }
+  public String loginSubmit(
+      @ModelAttribute LoginForm loginForm, BindingResult result, Model model) {
 
     // Check if submitted Username and password are correct
-    String errorMessage = userService.authenticate(user.getUserName(), user.getPassword());
+    String errorMessage =
+        userService.authenticate(loginForm.getUserName(), loginForm.getPassword());
 
     if (!errorMessage.isEmpty()) {
       // Throw error message and return to form
@@ -52,6 +59,6 @@ public class LoginViewController {
       return "login";
     }
 
-    return "theatre";
+    return "redirect:/movie";
   }
 }
