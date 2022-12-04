@@ -77,6 +77,8 @@ public class DatabaseLoader implements CommandLineRunner {
     //Tie the showtimes to a movie.
     this.showtimeService.addShowtimeToMovie(showtime1, movie1.getName());
     this.showtimeService.addShowtimeToMovie(showtime2, movie2.getName());
+    this.showtimeService.addSeatsEmptyTicketsToShowtime(showtime1, theatre1);
+    this.showtimeService.addSeatsEmptyTicketsToShowtime(showtime2, theatre1);
 
     //Save everything.
     this.movieRepository.save(movie1);
