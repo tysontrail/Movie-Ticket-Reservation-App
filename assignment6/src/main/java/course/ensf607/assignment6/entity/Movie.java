@@ -2,6 +2,7 @@ package course.ensf607.assignment6.entity;
 
 import java.io.Serializable;
 import java.time.LocalDate;
+import java.util.HashSet;
 import java.util.Set;
 
 import javax.persistence.Column;
@@ -38,11 +39,11 @@ public class Movie implements Serializable {
 
 	@JsonIgnore
     @ManyToMany(mappedBy = "movies")
-    private Set<Theatre> theatres;
+    private Set<Theatre> theatres = new HashSet<Theatre>();
 
 	@JsonIgnore
 	@ManyToMany(mappedBy = "showtimeToMovie")
-	private Set<Showtime> showtimes;
+	private Set<Showtime> showtimes = new HashSet<Showtime>();
 
 	public Movie(Long id, String name, String description, LocalDate privateStart, LocalDate publicStart) {
 		this.id = id;

@@ -61,9 +61,9 @@ public class UserService {
     this.userRepository.save(newUser);
   }
 
-  public void addTicketToUser(long userId, long ticketId){
+  public void addTicketToUser(long userId, long ticketId) {
     Optional<User> user = userRepository.findUserById(userId);
-    if(!user.isPresent()){
+    if (!user.isPresent()) {
       throw new IllegalStateException("Could not find user Id.");
     }
     Ticket ticket = Ticket.getInstance();
@@ -89,5 +89,26 @@ public class UserService {
 
   public Iterable<User> getAllUsers() {
     return this.userRepository.findAll();
+  }
+
+  public String authenticate(String username, String password) {
+    // Check repository for User
+    Optional<User> foundUser = this.userRepository.findByUserName(username);
+
+    // If user not found by username, return error message
+    if (!foundUser.isPresent()) {
+      return "Username doesn't exist.";
+    }
+
+    // If password doesn't match username, return error message
+    if (!foundUser.get().getPassword().equals(password)) {
+      return "Incorrect password.";
+    }
+
+    // Set user as static only instance "Logged in"
+    User.setInstance(foundUser.get());
+
+    // Return empty string
+    return "";
   }
 }

@@ -23,18 +23,29 @@ import lombok.Setter;
 @Table(name = "user")
 public class User implements Serializable {
 
-  protected static User onlyInstance;
+  private static User onlyInstance = null;
+  private static boolean loggedIn = false;
+
+  public static boolean isLoggedIn() {
+    return loggedIn;
+  }
+
+  public static void setLoggedIn(boolean loggedIn) {
+    User.loggedIn = loggedIn;
+  }
 
   public static User getInstance() {
     return onlyInstance;
   }
 
   public static void setInstance(User user) {
-    onlyInstance = user;
+    User.onlyInstance = user;
+    setLoggedIn(true);
   }
 
   public static void setInstanceNull() {
-    onlyInstance = null;
+    User.onlyInstance = null;
+    setLoggedIn(false);
   }
 
   @Id
@@ -46,32 +57,30 @@ public class User implements Serializable {
   private String userName;
 
   @NotEmpty(message = "First name cannot be empty.")
-  protected String firstName;
+  private String firstName;
 
   @NotEmpty(message = "Last name cannot be empty.")
-  protected String lastName;
+  private String lastName;
 
   @NotEmpty(message = "Email cannot be empty.")
-  protected String email;
+  private String email;
 
   @NotEmpty(message = "Password cannot be empty.")
-  protected String password;
+  private String password;
 
   // @NotNull(message = "Credit Card cannot be empty.")
   // @Range(min = 16, max = 16, message = "Credit Card should be 16 digits.")
-  protected long creditCard;
+  private long creditCard;
 
   // @NotNull(message = "CVC cannot be empty.")
   // @Range(min = 3, max = 3, message = "CVC should be 3 digits.")
-  protected int cvcNumber;
+  private int cvcNumber;
 
   // @NotNull(message = "Expiry Date cannot be empty.")
   // @Range(min = 4, max = 4, message = "Expiry Date should be 4 digits (MMYY)")
-  protected int expiryDate;
+  private int expiryDate;
 
   private LocalDate annualRenewalDate;
-
-  private boolean paidAnnualFee;
 
   @OneToMany(mappedBy = "user")
   private Set<Ticket> tickets = new HashSet<>();
@@ -98,8 +107,6 @@ public class User implements Serializable {
     this.creditCard = creditCard;
     this.cvcNumber = cvcNumber;
     this.expiryDate = expiryDate;
-    this.annualRenewalDate = LocalDate.now();
-    this.paidAnnualFee = false;
   }
 
   public User(
@@ -119,13 +126,10 @@ public class User implements Serializable {
     this.creditCard = creditCard;
     this.cvcNumber = cvcNumber;
     this.expiryDate = expiryDate;
-    this.annualRenewalDate = LocalDate.now();
-    this.paidAnnualFee = false;
   }
 
-  public void addTicket(Ticket ticket){
+  public void addTicket(Ticket ticket) {
     ticket.setUser(this);
     tickets.add(ticket);
   }
 }
-

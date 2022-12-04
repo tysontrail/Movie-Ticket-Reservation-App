@@ -24,9 +24,9 @@ public class TicketController {
         return this.ticketService.searchTicketById(ticketId);
     }
 
-    @PostMapping({"/api/v1/cancelticket"})
-    public Optional<Ticket> cancelTicket(@RequestParam Long ticketId){
-        return this.ticketService.cancelTicket(ticketId);
-    }
+//    @PostMapping({"/api/v1/cancelticket"})
+//    public Optional<Ticket> cancelTicket(@RequestParam Long ticketId){
+//        return this.ticketService.cancelTicket(ticketId);
+//    }
 
 }

@@ -55,12 +55,15 @@ public class Showtime implements Serializable {
     this.startTime = startTime;
     //        this.movie = movie;
     this.theatre = theatre;
-    for (int i = 1; i <= theatre.getSeatRows(); i++) {
-      for (int j = 1; j <= theatre.getSeatCols(); j++) {
-        seats.add(new Seat(this, i, j));
-      }
-    }
+    this.seats = new HashSet<Seat>();
+//    for (int i = 1; i <= theatre.getSeatRows(); i++) {
+//      for (int j = 1; j <= theatre.getSeatCols(); j++) {
+//        seats.add(new Seat(this, i, j));
+//      }
+//    }
   }
+
+
 
   public Showtime(LocalDateTime startTime, Theatre theatre) {
     this.id = id;
@@ -68,16 +71,21 @@ public class Showtime implements Serializable {
     this.seats = new HashSet<>();
     //        this.movie = movie;
     this.theatre = theatre;
-    for (int i = 1; i <= theatre.getSeatRows(); i++) {
-      for (int j = 1; j <= theatre.getSeatCols(); j++) {
-        seats.add(new Seat(this, i, j));
-      }
-    }
+    this.seats = new HashSet<>();
+//    for (int i = 1; i <= theatre.getSeatRows(); i++) {
+//      for (int j = 1; j <= theatre.getSeatCols(); j++) {
+//        seats.add(new Seat(this, i, j));
+//      }
+//    }
   }
 
   public void addMovieToShowtime(Optional<Movie> movie) {
     if (movie.isPresent()) {
       showtimeToMovie.add(movie.get());
     }
+  }
+
+  public void addSeatToShowtime(Seat seat){
+    seats.add(seat);
   }
 }
