@@ -36,6 +36,8 @@ public class Seat implements Serializable {
     @JoinColumn(name="showtime_id", nullable=false)
 	private Showtime showtime;
 
+	private boolean reserved;
+
     private int seatRow;
 
     private int seatColumn;
@@ -46,6 +48,7 @@ public class Seat implements Serializable {
         this.showtime = showtime;
         this.seatRow = row;
         this.seatColumn = column;
+        this.reserved = false;
     }
 
     public Seat(Ticket ticket, Showtime showtime, int row, int column) {
@@ -53,12 +56,14 @@ public class Seat implements Serializable {
         this.showtime = showtime;
         this.seatRow = row;
         this.seatColumn = column;
+        this.reserved = false;
     }
 
     public Seat(Showtime showtime, int row, int column) {
         this.showtime = showtime;
         this.seatRow = row;
         this.seatColumn = column;
+        this.reserved = false;
     }
 
     public Seat(Long id, Showtime showtime, int row, int column) {
@@ -66,7 +71,20 @@ public class Seat implements Serializable {
         this.showtime = showtime;
         this.seatRow = row;
         this.seatColumn = column;
+        this.reserved = false;
     }
+
+    // public void ReserveSeat(Ticket ticket, Showtime showtime,Long id, int row, int column ){
+    //     this.ticket = ticket;
+    //     this.showtime = showtime;
+    //     this.id = id;
+    //     this.seatRow = row;
+    //     this.seatColumn = column;
+    //     this.reserved = true;        
+
+    // }
+
+
 
 }
 
