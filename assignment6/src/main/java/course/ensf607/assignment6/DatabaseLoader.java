@@ -27,17 +27,16 @@ public class DatabaseLoader implements CommandLineRunner {
 
   @Override
   public void run(String... args) throws Exception {
-    //   this.userRepository.save(
-    //       new User(
-    //           "Aaron", "Manuel", "amanuel1", "email@email.com", "password", 12345678, 202,
+    // this.userRepository.save(
+    //     new User(
+    //         "Aaron", "Manuel", "amanuel1", "email@email.com", "password", 12345678, 202,
     // 12232020));
-    //   this.movieRepository.save(
-    //       new Movie(
-    //           "The Cake Knight Rises", "A cake knight will rise.", LocalDate.now(),
+    // this.movieRepository.save(
+    //     new Movie(
+    //         "The Cake Knight Rises", "A cake knight will rise.", LocalDate.now(),
     // LocalDate.now()));
-    //   this.theatreRepository.save(
-    //       new Theatre("Canyon Meadows Theatre", "13226 Macleod Trail", 10, 10));
-    //   //        this.showtimeRepository.save(new Showtime());
-    // }
+    // this.theatreRepository.save(
+    //     new Theatre("Canyon Meadows Theatre", "13226 Macleod Trail", 10, 10));
+    // this.showtimeRepository.save(new Showtime());
   }
 }
