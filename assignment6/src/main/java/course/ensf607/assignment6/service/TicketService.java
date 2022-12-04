@@ -53,4 +53,12 @@ public class TicketService {
 //    public Ticket createTicket(){
 //        return new Ticket();
 //    }
+
+public void addTicket(Ticket ticket) {
+    Optional<Ticket> checkTicket = searchTicketById(ticket.getId());
+    if (checkTicket.isPresent()) {
+      throw new IllegalStateException("Ticket ID already present in database.");
+    }
+    this.ticketRepository.save(ticket);
+  }
 }
