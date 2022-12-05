@@ -42,6 +42,7 @@ public class Showtime implements Serializable {
   @JoinColumn(name = "theatre_id", nullable = false)
   private Theatre theatre;
 
+  @JsonIgnore
   @OneToMany(mappedBy = "showtime")
   private Set<Seat> seats;
 

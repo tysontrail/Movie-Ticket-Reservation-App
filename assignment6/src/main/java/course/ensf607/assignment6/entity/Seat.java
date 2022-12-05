@@ -21,7 +21,7 @@ import lombok.Setter;
 @Setter
 @NoArgsConstructor
 @Table(name = "seat")
-public class Seat implements Serializable, Comparator<Seat> {
+public class Seat implements Serializable, Comparable<Seat> {
 
   @Id
   @GeneratedValue(strategy = GenerationType.AUTO)
@@ -82,13 +82,14 @@ public class Seat implements Serializable, Comparator<Seat> {
   }
 
   @Override
-  public int compare(Seat o1, Seat o2) {
-    // TODO Auto-generated method stub
-    if (o1.id > o2.id) {
+  public int compareTo(Seat o) {
+    if (this.id < o.id) {
       return -1;
-    } else if (o1.seatRow < o2.seatColumn) {
+    }
+    else if(this.id > o.id){
       return 1;
-    } else {
+    }
+    else{
       return 0;
     }
   }

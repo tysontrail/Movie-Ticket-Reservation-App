@@ -1,5 +1,6 @@
 package course.ensf607.assignment6.controller;
 
+import course.ensf607.assignment6.entity.Seat;
 import course.ensf607.assignment6.entity.Showtime;
 import course.ensf607.assignment6.entity.Theatre;
 import course.ensf607.assignment6.service.ShowtimeService;
@@ -9,6 +10,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDateTime;
 import java.util.Optional;
+import java.util.Set;
 
 @RestController
 @CrossOrigin({"*"})
@@ -48,4 +50,8 @@ public class ShowtimeController {
         this.showtimeService.selectShowtime(showtimeId);
     }
 
+    @GetMapping({"/api/v1/getshowtimeseats"})
+        public Set<Seat> getShowtimeSeats(Long id){
+        return this.showtimeService.getShowtimeSeats(id);
+    }
 }
