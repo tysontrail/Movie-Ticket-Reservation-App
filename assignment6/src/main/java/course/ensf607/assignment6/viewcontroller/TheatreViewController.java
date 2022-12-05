@@ -10,6 +10,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+/**Theatre controller for testing theatre.html.
+ */
 @Controller
 @RequestMapping(path = "/theatre")
 public class TheatreViewController {

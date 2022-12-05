@@ -6,6 +6,8 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+/**Login service/controller for logging in as user, is a controller class but is a spring boot service class.
+ */
 @Service
 public class LoginService {
 
@@ -22,8 +24,6 @@ public class LoginService {
       return foundUser;
     } else {
       return Optional.empty();
-      //            throw new InputMismatchException("Username or password is wrong.");
-      //
     }
   }
 }

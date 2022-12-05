@@ -13,6 +13,8 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+/**View controller for the view, which is located in the resources/templates folder for html..
+ */
 @Controller
 @RequestMapping(path = "/login")
 public class LoginViewController {

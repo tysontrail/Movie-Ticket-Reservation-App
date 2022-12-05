@@ -4,10 +4,11 @@ import course.ensf607.assignment6.entity.Movie;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 
-import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 
+/**Interface for the movie database.
+ */
 public interface MovieRepository extends JpaRepository<Movie, Long> {
 
     Optional<Movie> findMovieById(Long id);

@@ -15,6 +15,8 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+/**User class that models the registered user. Implements a singleton for passing around.
+ */
 @Entity
 @Getter
 @Setter

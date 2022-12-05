@@ -14,6 +14,8 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+/**Register controller for testing the view for register.html.
+ */
 @Controller
 @RequestMapping(path = "/register")
 public class RegisterViewController {

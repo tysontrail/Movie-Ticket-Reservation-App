@@ -12,6 +12,8 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
+/**Interface for the seats database to allow for storage and access by the services (e.g controllers.
+ */
 @Repository
 public interface SeatRepository extends JpaRepository<Seat, Long> {
     

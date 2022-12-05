@@ -19,6 +19,8 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+/**Showtime class that models a showtime with its seats and all its movies..
+ */
 @Entity
 @Getter
 @Setter

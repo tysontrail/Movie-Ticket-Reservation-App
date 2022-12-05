@@ -18,6 +18,9 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+/**Theatre entity class that mimics a theatre with all its
+ * relationships with seats showtimes and tickets. Implemented as singleton.
+ */
 @Entity
 @Getter
 @Setter

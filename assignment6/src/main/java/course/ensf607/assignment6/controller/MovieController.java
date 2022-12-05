@@ -6,6 +6,8 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+/**Movie controller class used mostly for testing on postman.
+ */
 @RestController
 @CrossOrigin({"*"})
 public class MovieController {
@@ -26,11 +28,6 @@ public class MovieController {
   public Optional<Movie> searchAllMovies(@RequestParam String name) {
     return this.movieService.searchAllMovies(name);
   }
-
-//  @PostMapping({"/api/v1/selectmovie"})
-//  public void selectMovie(@RequestBody Movie theMovie) {
-//    this.movieService.selectMovie(theMovie);
-//  }
 
   @PostMapping({"/api/v1/selectmovie"})
   public void selectMovie(@RequestParam String movieName) {

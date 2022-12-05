@@ -7,6 +7,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+/**Payment controller class used mostly for testing on postman.
+ */
 @RestController
 @CrossOrigin({"*"})
 public class PaymentController {
@@ -39,12 +41,5 @@ public class PaymentController {
     public boolean registeredUserPayAnnualFee(String username){
         return this.paymentService.registeredUserPayAnnualFee(username);
     }
-
-
-
-
-
-
-
 
 }

@@ -10,6 +10,8 @@ import javax.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+/**Seat service class that allows for view, add, select functionality on the backend..
+ */
 @Service
 @Transactional
 public class ShowtimeService {
@@ -61,11 +63,6 @@ public class ShowtimeService {
       throw new IllegalStateException("Could not find showtime.");
     }
   }
-
-  //    public Iterable<Showtime> getAllTheatreShowtimes(String theatreName){
-  //
-  //        return null;
-  //    }
 
   public Iterable<Showtime> getAllMovieShowtimes(String movieName) {
     return showtimeRepository.findByMovieName(movieName);

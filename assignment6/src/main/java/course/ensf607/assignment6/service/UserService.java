@@ -8,6 +8,8 @@ import java.util.List;
 import java.util.Optional;
 import org.springframework.stereotype.Service;
 
+/**User service class that allows for register, add search and autheticate.
+ */
 @Service
 public class UserService {
 

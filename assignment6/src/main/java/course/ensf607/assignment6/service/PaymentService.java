@@ -7,6 +7,8 @@ import java.time.LocalDate;
 import java.util.Optional;
 import org.springframework.stereotype.Service;
 
+/**Payment service class that allows for paying and communicating with financial institutions.
+ */
 @Service
 public class PaymentService {
 

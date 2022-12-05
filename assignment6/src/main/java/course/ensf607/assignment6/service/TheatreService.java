@@ -9,6 +9,8 @@ import java.util.Optional;
 import course.ensf607.assignment6.repository.TicketRepository;
 import org.springframework.stereotype.Service;
 
+/**Theatre service class that allows for search, view and select.
+ */
 @Service
 public class TheatreService {
 
