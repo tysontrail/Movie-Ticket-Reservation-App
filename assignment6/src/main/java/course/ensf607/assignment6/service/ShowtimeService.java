@@ -5,9 +5,6 @@ import course.ensf607.assignment6.repository.SeatRepository;
 import course.ensf607.assignment6.repository.ShowtimeRepository;
 import course.ensf607.assignment6.repository.TicketRepository;
 import java.time.LocalDateTime;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
 import java.util.Optional;
 import java.util.Set;
 import javax.transaction.Transactional;
@@ -78,10 +75,10 @@ public class ShowtimeService {
   public Iterable<Seat> getShowtimeSeats(Long showtimeId) {
     Optional<Showtime> showtime = showtimeRepository.findById(showtimeId);
     Set<Seat> seatsbefore = showtime.get().getSeats();
-    List<Seat> seatsafter = new ArrayList<Seat>(seatsbefore);
+    return seatsbefore;
+    // List<Seat> seatsafter = new ArrayList<Seat>(seatsbefore);
 
-    return Collections.sort(seatsafter);
-    ;
+    // return List.sort(seatsafter);
   }
 
   public void addShowtimeToTheatre(LocalDateTime startTime, Theatre theatre) {

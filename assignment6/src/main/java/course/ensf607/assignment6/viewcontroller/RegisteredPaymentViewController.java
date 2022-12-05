@@ -39,7 +39,7 @@ public class RegisteredPaymentViewController {
     User user = User.getInstance();
     model.addAttribute("user", user);
     Seat seat = seatService.SearchSeatById(seatId).get();
-    model.addAttribute("sear", seat);
+    model.addAttribute("seat", seat);
     Showtime showtime = seat.getShowtime();
     model.addAttribute("showtime", showtime);
     Theatre theatre = showtime.getTheatre();

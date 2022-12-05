@@ -58,10 +58,14 @@
         </div>
       </form>
     </div>
-
     <ul>
       <li>
-        <a th:href="@{/login}">Back to login</a>
+        <div th:if="${registeredUser}">
+          <a th:href="@{/login}">Logout</a>
+        </div>
+        <div th:unless="${registeredUser}">
+          <a th:href="@{/login}">Login</a>
+        </div>
       </li>
     </ul>
   </body>
