@@ -71,11 +71,13 @@ public class ShowtimeService {
     return showtimeRepository.findByMovieName(movieName);
   }
 
-  public Set<Seat> getShowtimeSeats(Long showtimeId) {
+  public ArrayList<Seat> getShowtimeSeats(Long showtimeId) {
     Optional<Showtime> showtime = showtimeRepository.findById(showtimeId);
     Set<Seat> seatsTreeSet = new TreeSet<Seat>();
     seatsTreeSet.addAll(showtime.get().getSeats());
-    return seatsTreeSet;
+    ArrayList<Seat> seatsList = new ArrayList<>(seatsTreeSet);
+
+    return seatsList;
   }
 
   public void addShowtimeToTheatre(LocalDateTime startTime, Theatre theatre) {
