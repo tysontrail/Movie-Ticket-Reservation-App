@@ -73,13 +73,9 @@ public class ShowtimeService {
 
   public Set<Seat> getShowtimeSeats(Long showtimeId) {
     Optional<Showtime> showtime = showtimeRepository.findById(showtimeId);
-    Set<Seat> seatsbefore = showtime.get().getSeats();
-    //    List<Seat> seatsafter = new ArrayList<Seat>(seatsbefore);
-    //    List<Seat> seatList = new ArrayList<Seat>();
-    //    seatList.addAll(seatsbefore);
-    //
-    //    Collections.sort(seatList);
-    return null;
+    Set<Seat> seatsTreeSet = new TreeSet<Seat>();
+    seatsTreeSet.addAll(showtime.get().getSeats());
+    return seatsTreeSet;
   }
 
   public void addShowtimeToTheatre(LocalDateTime startTime, Theatre theatre) {
