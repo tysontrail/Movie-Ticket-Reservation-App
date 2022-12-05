@@ -25,25 +25,27 @@
         <tr>
           <th scope="col">Row</th>
           <th scope="col">Number</th>
+          <th scope="col">Selection</th>
         </tr>
       </thead>
       <tbody>
         <tr th:each="seat : ${seats}">
-          <td th:text="${seat.row}"></td>
-          <td th:text="${seat.column}"></td>
+          <td th:text="${seat.seatRow}"></td>
+          <td th:text="${seat.seatColumn}"></td>
           <td>
+            <!-- Logic for seat being taken later !-->
             <div th:if="${registeredUser}">
-              <a th:href="${/payment}" class="btn btn-primary">Select Seat</a>
-            </div>
-            <div th:unless="${registeredUser}">
-              <a th:href="{/payment/regular-user" class="btn btn-primary"
+              <a
+                th:href="@{/payment(seatId=${seat.id})}"
+                class="btn btn-primary"
                 >Select Seat</a
               >
             </div>
+            <div th:unless="${registeredUser}">
+              <a th:href="@{/payment}" class="btn btn-primary">Select Seat</a>
+            </div>
           </td>
-          <br />
         </tr>
-        <br />
       </tbody>
     </table>
     <ul>

@@ -5,14 +5,14 @@ import course.ensf607.assignment6.repository.SeatRepository;
 import course.ensf607.assignment6.repository.ShowtimeRepository;
 import course.ensf607.assignment6.repository.TicketRepository;
 import java.time.LocalDateTime;
-import java.util.HashSet;
-import java.util.Iterator;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 import java.util.Optional;
-
+import java.util.Set;
+import javax.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
-import javax.transaction.Transactional;
 
 @Service
 @Transactional
@@ -25,8 +25,7 @@ public class ShowtimeService {
   // working.
   private final TicketRepository ticketRepository;
 
-  @Autowired
-  private final SeatRepository seatRepository;
+  @Autowired private final SeatRepository seatRepository;
 
   public ShowtimeService(
       TheatreService theatreService,
@@ -73,12 +72,16 @@ public class ShowtimeService {
   //    }
 
   public Iterable<Showtime> getAllMovieShowtimes(String movieName) {
-    return showtimeRepository.findAllShowtimesByMovie(movieName);
+    return showtimeRepository.findByMovieName(movieName);
   }
 
   public Iterable<Seat> getShowtimeSeats(Long showtimeId) {
     Optional<Showtime> showtime = showtimeRepository.findById(showtimeId);
-    return showtime.get().getSeats();
+    Set<Seat> seatsbefore = showtime.get().getSeats();
+    List<Seat> seatsafter = new ArrayList<Seat>(seatsbefore);
+
+    return Collections.sort(seatsafter);
+    ;
   }
 
   public void addShowtimeToTheatre(LocalDateTime startTime, Theatre theatre) {
@@ -99,7 +102,7 @@ public class ShowtimeService {
     }
   }
 
-  public void addSeatsEmptyTicketsToShowtime(Showtime showtime, Theatre theatre){
+  public void addSeatsEmptyTicketsToShowtime(Showtime showtime, Theatre theatre) {
     for (int i = 1; i <= theatre.getSeatRows(); i++) {
       for (int j = 1; j <= theatre.getSeatCols(); j++) {
         Ticket ticket = new Ticket();

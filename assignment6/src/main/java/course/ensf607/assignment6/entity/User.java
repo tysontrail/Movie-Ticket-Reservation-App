@@ -11,7 +11,6 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
-
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -56,13 +55,13 @@ public class User implements Serializable {
   // @NotEmpty(message = "Username cannot be empty.")
   private String userName;
 
-//  @NotEmpty(message = "First name cannot be empty.")
+  //  @NotEmpty(message = "First name cannot be empty.")
   protected String firstName;
 
-//  @NotEmpty(message = "Last name cannot be empty.")
+  //  @NotEmpty(message = "Last name cannot be empty.")
   protected String lastName;
 
-//  @NotEmpty(message = "Email cannot be empty.")
+  //  @NotEmpty(message = "Email cannot be empty.")
   protected String email;
 
   // @NotEmpty(message = "Password cannot be empty.")

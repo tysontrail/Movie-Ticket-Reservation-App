@@ -21,7 +21,6 @@
     <p th:text="'Credit Card: ' + ${user.creditCard}" />
     <p th:text="'CVC: ' + ${user.cvcNumber}" />
     <p th:text="'Expiry Date: ' + ${user.expiryDate}" />
-    <p th:text="'CVC: ' + ${user.cvcNumber}" />
     <p th:text="'Movie: ' + ${movie.name}" />
     <p th:text="'Theatre: + ${theatre.name}"/>
     <p th:text="'Showtime: + ${showtime.name}"/>
@@ -40,7 +39,8 @@
       </tr>
       </tbody>
       </table>
-      <a th:href="#" class="btn btn-primary"
+      <p th:text="'Price: ' + ${seat.price}" />
+      <a href="#" class="btn btn-primary"
       >Submit</a
     >
       <li>
