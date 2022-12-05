@@ -24,30 +24,37 @@ public class PaymentService {
         this.financialService = financialService;
     }
 
-    public boolean regularUserPayTicket(String firstName, String lastName, String email, long creditCard, int cvcNumber){
+    public boolean regularUserPayTicket(String firstName, String lastName, String email, long creditCard, int cvcNumber,
+                                        int expiryDate){
         //This should be null
-        RegularUser regularUser = (RegularUser)User.getInstance();
+        RegularUser regularUser = RegularUser.getInstance();
         //Then we fill in the rest.
         regularUser.setFirstName(firstName);
         regularUser.setLastName(lastName);
         regularUser.setEmail(email);
         regularUser.setCreditCard(creditCard);
         regularUser.setCvcNumber(cvcNumber);
+        regularUser.setExpiryDate(expiryDate);
 
         //Check if all the information here belongs in the financial Institution
         if(financialService.verify(regularUser) == true) {
             return true;
-        };
+        }
         return false;
 
     }
 
     public boolean registeredUserPayTicket(String username){
         Optional<User> registeredUser = this.userService.searchUserByUserName(username);
+        if(!registeredUser.isPresent()){
+            return false;
+        }
         if(financialService.verify(registeredUser.get()) == true) {
             return true;
-        };
-        return false;
+        }
+        else{
+            return false;
+        }
     }
 
     //Run whenever the user signs in.
@@ -56,29 +63,30 @@ public class PaymentService {
         if(!registeredUser.isPresent()){
             return false;
         }
-        if(financialService.verify(registeredUser.get()) == true) {
-            registeredUser.get().setPaidAnnualFee(true);
-            registeredUser.get().setAnnualRenewalDate(LocalDate.now());
-            return true;
-        };
+//        if(financialService.verify(registeredUser.get()) == true) {
+//            registeredUser.get().setPaidAnnualFee(true);
+//            registeredUser.get().setAnnualRenewalDate(LocalDate.now());
+//            return true;
+//        }
 
         if(registeredUser.get().getAnnualRenewalDate().compareTo(LocalDate.now()) < 0){
             registeredUser.get().setPaidAnnualFee(false);
             return false;
         }
-        return false;
+        return true;
     }
 
-    public void registeredUserPayAnnualFee(String username){
+    public boolean registeredUserPayAnnualFee(String username){
         Optional<User> registeredUser = this.userService.searchUserByUserName(username);
+
+        if(!registeredUser.isPresent()){
+            return false;
+        }
         if(financialService.verify(registeredUser.get()) == true) {
             registeredUser.get().setPaidAnnualFee(true);
             registeredUser.get().setAnnualRenewalDate(LocalDate.now());
-        };
-
+            return true;
+        }
+        return false;
     }
-
-
-
-
 }

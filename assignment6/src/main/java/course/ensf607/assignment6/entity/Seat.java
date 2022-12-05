@@ -84,7 +84,7 @@ public class Seat implements Serializable, Comparator<Seat> {
   @Override
   public int compare(Seat o1, Seat o2) {
     // TODO Auto-generated method stub
-    if (o1.seatRow > o2.seatColumn) {
+    if (o1.id > o2.id) {
       return -1;
     } else if (o1.seatRow < o2.seatColumn) {
       return 1;

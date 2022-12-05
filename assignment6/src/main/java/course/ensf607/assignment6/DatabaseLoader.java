@@ -1,13 +1,8 @@
 package course.ensf607.assignment6;
 
-import course.ensf607.assignment6.entity.Movie;
-import course.ensf607.assignment6.entity.Showtime;
-import course.ensf607.assignment6.entity.Theatre;
-import course.ensf607.assignment6.entity.User;
-import course.ensf607.assignment6.repository.MovieRepository;
-import course.ensf607.assignment6.repository.ShowtimeRepository;
-import course.ensf607.assignment6.repository.TheatreRepository;
-import course.ensf607.assignment6.repository.UserRepository;
+import course.ensf607.assignment6.entity.*;
+import course.ensf607.assignment6.repository.*;
+import course.ensf607.assignment6.service.FinancialInstService;
 import course.ensf607.assignment6.service.ShowtimeService;
 import course.ensf607.assignment6.service.TheatreService;
 import java.time.LocalDate;
@@ -23,6 +18,7 @@ public class DatabaseLoader implements CommandLineRunner {
   private final ShowtimeRepository showtimeRepository;
   private final ShowtimeService showtimeService;
   private final TheatreService theatreService;
+  private final FinancialInstRepository financialRepository;
 
   public DatabaseLoader(
       UserRepository userRepository,
@@ -30,13 +26,15 @@ public class DatabaseLoader implements CommandLineRunner {
       MovieRepository movieRepository,
       ShowtimeRepository showtimeRepository,
       ShowtimeService showtimeService,
-      TheatreService theatreService) {
+      TheatreService theatreService,
+      FinancialInstRepository financialRepository) {
     this.userRepository = userRepository;
     this.movieRepository = movieRepository;
     this.showtimeRepository = showtimeRepository;
     this.theatreRepository = theatreRepository;
     this.showtimeService = showtimeService;
     this.theatreService = theatreService;
+    this.financialRepository = financialRepository;
   }
 
   @Override
@@ -79,6 +77,14 @@ public class DatabaseLoader implements CommandLineRunner {
     this.showtimeService.addShowtimeToMovie(showtime2, movie2.getName());
     this.showtimeService.addSeatsEmptyTicketsToShowtime(showtime1, theatre1);
     this.showtimeService.addSeatsEmptyTicketsToShowtime(showtime2, theatre1);
+
+    // Establish financial institution database.
+    this.financialRepository.save(
+            new FinancialInst(
+                    "Aaron", "Manuel",  12345678, 202, 12232029));
+    this.financialRepository.save(
+            new FinancialInst(
+                    "Sue", "Martin", 87654321, 453, 11052024));
 
     // Save everything.
     this.movieRepository.save(movie1);
