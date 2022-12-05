@@ -108,6 +108,7 @@ public class User implements Serializable {
     this.creditCard = creditCard;
     this.cvcNumber = cvcNumber;
     this.expiryDate = expiryDate;
+    this.paidAnnualFee = false;
   }
 
   public User(
@@ -127,6 +128,7 @@ public class User implements Serializable {
     this.creditCard = creditCard;
     this.cvcNumber = cvcNumber;
     this.expiryDate = expiryDate;
+    this.paidAnnualFee = false;
   }
 
   public void addTicket(Ticket ticket) {

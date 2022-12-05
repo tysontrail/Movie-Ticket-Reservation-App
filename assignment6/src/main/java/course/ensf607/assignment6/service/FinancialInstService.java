@@ -28,9 +28,9 @@ public class FinancialInstService {
     }
 
     public boolean checkFinancialDetails(FinancialInst financialAcct, User user){
-        if(financialAcct.getFirstName() != user.getFirstName())
+        if(!financialAcct.getFirstName().equals(user.getFirstName()))
             return false;
-        if(financialAcct.getLastName() != user.getLastName())
+        if(!financialAcct.getLastName().equals(user.getLastName()))
             return false;
         if(financialAcct.getCvcNumber() != user.getCvcNumber())
             return false;
