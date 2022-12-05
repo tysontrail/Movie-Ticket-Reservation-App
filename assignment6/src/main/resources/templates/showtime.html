@@ -32,7 +32,7 @@
           <td th:text="${showtime.startTime}"></td>
           <td>
             <a
-              href="@{/seat(showtimeid=${showtime.id})}"
+              th:href="@{/seat(showtimeId=${showtime.id})}"
               class="btn btn-primary"
               >Select Showtime</a
             >

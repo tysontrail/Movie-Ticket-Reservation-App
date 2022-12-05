@@ -32,7 +32,7 @@
       </p>
       <p>
         Password:
-        <input type="text" th:field="*{password}" id="password" required />
+        <input type="password" th:field="*{password}" id="password" required />
       </p>
       <input type="submit" value="Submit" />
       <div th:if="${#fields.hasErrors('global')}">
