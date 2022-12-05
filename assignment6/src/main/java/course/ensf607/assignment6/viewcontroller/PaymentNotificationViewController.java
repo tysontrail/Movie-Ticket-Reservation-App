@@ -7,6 +7,9 @@ import course.ensf607.assignment6.entity.Showtime;
 import course.ensf607.assignment6.entity.Theatre;
 import course.ensf607.assignment6.entity.Ticket;
 import course.ensf607.assignment6.entity.User;
+import course.ensf607.assignment6.repository.PaymentRepository;
+import course.ensf607.assignment6.repository.SeatRepository;
+import course.ensf607.assignment6.repository.TicketRepository;
 import course.ensf607.assignment6.service.PaymentService;
 import course.ensf607.assignment6.service.SeatService;
 import course.ensf607.assignment6.service.TicketService;
@@ -26,17 +29,26 @@ public class PaymentNotificationViewController {
   private final TicketService ticketService;
   private final UserService userService;
   private final PaymentService paymentService;
+  private final PaymentRepository paymentRepository;
+  private final SeatRepository seatRepository;
+  private final TicketRepository ticketRepository;
 
   @Autowired
   public PaymentNotificationViewController(
-      PaymentService paymentService,
       SeatService seatService,
       TicketService ticketService,
-      UserService userService) {
-    this.paymentService = paymentService;
+      UserService userService,
+      PaymentService paymentService,
+      PaymentRepository paymentRepository,
+      SeatRepository seatRepository,
+      TicketRepository ticketRepository) {
     this.seatService = seatService;
     this.ticketService = ticketService;
     this.userService = userService;
+    this.paymentService = paymentService;
+    this.paymentRepository = paymentRepository;
+    this.seatRepository = seatRepository;
+    this.ticketRepository = ticketRepository;
   }
 
   @GetMapping("/registered")
@@ -53,6 +65,11 @@ public class PaymentNotificationViewController {
     if (paymentConfirmation) {
       Payment payment = new Payment(user, seat.getPrice(), paymentConfirmation);
       Ticket ticket = new Ticket(user, theatre, seat, payment, seat.getPrice());
+      payment.setTicket(ticket);
+
+      paymentRepository.save(payment);
+      seatRepository.save(seat);
+      ticketRepository.save(ticket);
       model.addAttribute("user", user);
       model.addAttribute("seat", seat);
       model.addAttribute("showtime", showtime);

@@ -25,7 +25,7 @@
     <p th:text="'Showtime: ' + ${showtime.startTime}" />
     <p th:text="'Seat Row: ' + ${seat.seatRow}" />
     <p th:text="'Seat Number: ' + ${seat.seatColumn}" />
-    <p th:text="'Ticket Price: ' + ${seat.price}" />
+    <p th:text="'Ticket Price: $' + ${seat.price}" />
     <a
       th:href="@{/notification/registered(seatId=${seat.id})}"
       class="btn btn-primary"

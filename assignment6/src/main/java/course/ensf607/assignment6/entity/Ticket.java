@@ -90,6 +90,7 @@ public class Ticket implements Serializable {
     this.user = user;
     this.theatre = theatre;
     this.seat = seat;
+    seat.setReserved(true);
     this.payment = payment;
     this.balance = balance;
   }

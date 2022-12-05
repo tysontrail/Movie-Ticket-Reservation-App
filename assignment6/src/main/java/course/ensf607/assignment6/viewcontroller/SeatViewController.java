@@ -27,6 +27,6 @@ public class SeatViewController {
     model.addAttribute("seats", seats);
     boolean registeredUser = User.isLoggedIn();
     model.addAttribute("registeredUser", registeredUser);
-    return "seat";
+    return "seat-grid";
   }
 }
