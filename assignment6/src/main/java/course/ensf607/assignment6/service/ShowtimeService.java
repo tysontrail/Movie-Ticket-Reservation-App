@@ -73,19 +73,13 @@ public class ShowtimeService {
     return showtimeRepository.findByMovieName(movieName);
   }
 
-  public Set<Seat> getShowtimeSeats(Long showtimeId) {
+  public ArrayList<Seat> getShowtimeSeats(Long showtimeId) {
     Optional<Showtime> showtime = showtimeRepository.findById(showtimeId);
-//    return showtime.get().getSeats();
     Set<Seat> seatsTreeSet = new TreeSet<Seat>();
     seatsTreeSet.addAll(showtime.get().getSeats());
-//    List<Seat> seatsafter = new ArrayList<Seat>(seatsbefore);
-//    List<Seat> seatList = new ArrayList<Seat>();
-//    seatList.addAll(seatsbefore);
+    ArrayList<Seat> seatsList = new ArrayList<>(seatsTreeSet);
 
-//    Collections.sort(seatList);
-//    return null;
-
-    return seatsTreeSet;
+    return seatsList;
   }
 
   public void addShowtimeToTheatre(LocalDateTime startTime, Theatre theatre) {
