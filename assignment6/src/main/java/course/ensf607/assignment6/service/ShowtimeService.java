@@ -5,8 +5,7 @@ import course.ensf607.assignment6.repository.SeatRepository;
 import course.ensf607.assignment6.repository.ShowtimeRepository;
 import course.ensf607.assignment6.repository.TicketRepository;
 import java.time.LocalDateTime;
-import java.util.Optional;
-import java.util.Set;
+import java.util.*;
 import javax.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -72,13 +71,15 @@ public class ShowtimeService {
     return showtimeRepository.findByMovieName(movieName);
   }
 
-  public Iterable<Seat> getShowtimeSeats(Long showtimeId) {
+  public Set<Seat> getShowtimeSeats(Long showtimeId) {
     Optional<Showtime> showtime = showtimeRepository.findById(showtimeId);
     Set<Seat> seatsbefore = showtime.get().getSeats();
-    return seatsbefore;
-    // List<Seat> seatsafter = new ArrayList<Seat>(seatsbefore);
-
-    // return List.sort(seatsafter);
+    //    List<Seat> seatsafter = new ArrayList<Seat>(seatsbefore);
+    //    List<Seat> seatList = new ArrayList<Seat>();
+    //    seatList.addAll(seatsbefore);
+    //
+    //    Collections.sort(seatList);
+    return null;
   }
 
   public void addShowtimeToTheatre(LocalDateTime startTime, Theatre theatre) {
