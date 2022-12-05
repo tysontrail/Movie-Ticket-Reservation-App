@@ -49,10 +49,10 @@ public class DatabaseLoader implements CommandLineRunner {
     // Create some movies.
     Movie movie1 =
         new Movie(
-            "The Cake Knight Rises", "A cake knight will rise.", LocalDate.now(), LocalDate.now());
+            "The Cake Knight Rises", "A cake knight will rise.", LocalDate.of(2022, 11, 20), LocalDate.of(2022, 12, 01));
     Movie movie2 =
         new Movie(
-            "Love, Probably", "A film about love, probably", LocalDate.now(), LocalDate.now());
+            "Love, Probably", "A film about love, probably", LocalDate.of(2022, 12, 02), LocalDate.of(2022, 12,8));
     this.movieRepository.save(movie1);
     this.movieRepository.save(movie2);
 
@@ -65,8 +65,8 @@ public class DatabaseLoader implements CommandLineRunner {
     //    this.theatreRepository.save(theatre1);
 
     // Setup the showtimes, then create showtimes with the theatre.
-    LocalDateTime dateTime1 = LocalDateTime.of(2022, 12, 06, 14, 30);
-    LocalDateTime dateTime2 = LocalDateTime.of(2022, 12, 06, 16, 30);
+    LocalDateTime dateTime1 = LocalDateTime.of(2022, 12, 8, 14, 30);
+    LocalDateTime dateTime2 = LocalDateTime.of(2022, 12, 8, 16, 30);
     Showtime showtime1 = new Showtime(dateTime1, theatre1);
     Showtime showtime2 = new Showtime(dateTime2, theatre1);
     this.showtimeRepository.save(showtime1);
