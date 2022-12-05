@@ -9,6 +9,7 @@ import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.Optional;
 import java.util.Set;
 
@@ -51,7 +52,7 @@ public class ShowtimeController {
     }
 
     @GetMapping({"/api/v1/getshowtimeseats"})
-        public Set<Seat> getShowtimeSeats(Long id){
+        public ArrayList<Seat> getShowtimeSeats(Long id){
         return this.showtimeService.getShowtimeSeats(id);
     }
 }
