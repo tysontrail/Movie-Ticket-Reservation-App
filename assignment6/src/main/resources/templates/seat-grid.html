@@ -16,6 +16,9 @@
     .error {
       color: red;
     }
+    .button {
+      color: firebrick;
+    }
   </style>
   <body>
     <h1>Seat</h1>
@@ -24,23 +27,32 @@
     <table class="table">
       <tr th:each="row: ${seats}">
         <td th:each="number: ${row}">
-          <div th:switch="${number.reserved}">
-              <div th:case="true">
-                <a href="" class="btn btn-primary" style="color:firebrick"></a>
+          <div th:if="${number.reserved}">
+            <div>
+              <button type="button" class="button" style="color: firebrick">
+                Reserved
+              </button>
+            </div>
+          </div>
+          <div th:unless="${number.reserved}">
+            <div>
+              <div th:if="${registeredUser}">
+                <a
+                  th:href="@{/payment/registered(seatId=${number.id})}"
+                  class="btn btn-primary"
+                  style="color: dodgerblue"
+                  >Available</a
+                >
               </div>
-              <div th:case="false">
-                <div>
-                  <div th:if="${registeredUser}">
-                    <a
-                      th:href="@{/payment(seatId=${seat.id})}"
-                      class="btn btn-primary"
-                      ></a
-                    >
-                  </div>
-                  <div th:unless="${registeredUser}">
-                    <a th:href="@{/payment}" class="btn btn-primary" style="color:dodgerblue"></a>
-                  </div>
+              <div th:unless="${registeredUser}">
+                <a
+                  th:href="@{/regular(seatId=${number.id})}"
+                  class="btn btn-primary"
+                  style="color: dodgerblue"
+                  >Available</a
+                >
               </div>
+            </div>
           </div>
         </td>
       </tr>

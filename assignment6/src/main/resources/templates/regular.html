@@ -21,8 +21,7 @@
     <h2>User Payment Info</h2>
     <div class="form">
       <form
-        action="#"
-        th:action="@{/payment}"
+        th:action="@{/payment/regular(seatId=${seatId})}"
         th:object="${user}"
         method="post"
       >

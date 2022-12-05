@@ -2,6 +2,7 @@ package course.ensf607.assignment6.viewcontroller;
 
 import course.ensf607.assignment6.entity.Movie;
 import course.ensf607.assignment6.entity.Payment;
+import course.ensf607.assignment6.entity.RegularUser;
 import course.ensf607.assignment6.entity.Seat;
 import course.ensf607.assignment6.entity.Showtime;
 import course.ensf607.assignment6.entity.Theatre;
@@ -18,6 +19,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
@@ -78,40 +80,45 @@ public class PaymentNotificationViewController {
       model.addAttribute("ticket", ticket);
       return "payment-receipt";
     } else {
-      return "You are poor";
+      return "payment-error";
     }
   }
 
   @GetMapping("/regular")
-  public String paymentReceiptRegular(@RequestParam Long seatId, Model model) {
-    boolean paymentConfirmation;
+  public String paymentReceiptRegular(
+      @ModelAttribute RegularUser user, @RequestParam Long seatId, Model model) {
 
-    // if (User.isLoggedIn()) {
-    //   paymentConfirmation =
-    //       paymentService.registeredUserPayTicket(User.getInstance().getUserName());
-    //   if (paymentConfirmation) {
-    //     Payment payment = new Payment(User.getInstance(), seat.getPrice(), paymentConfirmation);
-    //     Ticket ticket = new Ticket(User.getInstance(), theatre, seat, payment, seat.getPrice());
-    //   }
-    // } else {
-    //   // paymentConfirmation = paymentService.regularUserPayTicket(user);
-    //   // if(paymentConfirmation){
-    //   //   Payment payment = new Payment(user, seat.getPrice(), paymentConfirmation);
-    //   //   Ticket ticket = new Ticket(user,theatre, seat, payment, seat.getPrice());
-    //   // }
-    // }
-    // if (User.isLoggedIn()) {
-    //   model.addAttribute("user", User.getInstance());
-    // } else {
-    //   model.addAttribute("user", user);
-    // }
-    // model.addAttribute("user", User.getInstance());
-    // model.addAttribute("seat", seat);
-    // Showtime showtime = seat.getShowtime();
-    // model.addAttribute("showtime", showtime);
-    // model.addAttribute("theatre", theatre);
-    // Movie movie = showtime.getMovie();
-    // model.addAttribute("movie", movie);
-    return "payment-receipt";
+    boolean paymentConfirmation;
+    Seat seat = seatService.SearchSeatById(seatId).get();
+    Showtime showtime = seat.getShowtime();
+    Theatre theatre = showtime.getTheatre();
+    Movie movie = showtime.getMovie();
+
+    paymentConfirmation =
+        paymentService.regularUserPayTicket(
+            user.getFirstName(),
+            user.getLastName(),
+            user.getEmail(),
+            user.getCreditCard(),
+            user.getCvcNumber(),
+            user.getExpiryDate());
+    if (paymentConfirmation) {
+      Payment payment = new Payment(user, seat.getPrice(), paymentConfirmation);
+      Ticket ticket = new Ticket(user, theatre, seat, payment, seat.getPrice());
+      payment.setTicket(ticket);
+
+      paymentRepository.save(payment);
+      seatRepository.save(seat);
+      ticketRepository.save(ticket);
+      model.addAttribute("user", user);
+      model.addAttribute("seat", seat);
+      model.addAttribute("showtime", showtime);
+      model.addAttribute("theatre", theatre);
+      model.addAttribute("movie", movie);
+      model.addAttribute("ticket", ticket);
+      return "payment-receipt";
+    } else {
+      return "payment-error";
+    }
   }
 }

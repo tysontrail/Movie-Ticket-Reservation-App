@@ -24,28 +24,19 @@ public class SeatViewController {
 
   @GetMapping
   public String seats(@RequestParam Long showtimeId, Model model) {
-    Iterable<Seat> seats = showtimeService.getShowtimeSeats(showtimeId);
-    ArrayList<Seat> row1 = new ArrayList<Seat>();
-    ArrayList<Seat> row2 = new ArrayList<Seat>();
-    ArrayList<Seat> row3 = new ArrayList<Seat>();
-    ArrayList<Seat> row4 = new ArrayList<Seat>();
-    ArrayList<Seat> row5 = new ArrayList<Seat>();
-    ArrayList<Seat> row6 = new ArrayList<Seat>();
-    ArrayList<Seat> row7 = new ArrayList<Seat>();
-    ArrayList<Seat> row8 = new ArrayList<Seat>();
-    ArrayList<Seat> row9 = new ArrayList<Seat>();
-    ArrayList<Seat> row10 = new ArrayList<Seat>();
+    ArrayList<Seat> seatsList = showtimeService.getShowtimeSeats(showtimeId);
     ArrayList<ArrayList<Seat>> seats = new ArrayList<ArrayList<Seat>>();
-    seats.add(row1);
-    seats.add(row2);
-    seats.add(row3);
-    seats.add(row4);
-    seats.add(row5);
-    seats.add(row6);
-    seats.add(row7);
-    seats.add(row8);
-    seats.add(row9);
-    seats.add(row10);
+
+    int counter = 0;
+
+    for (int i = 0; i < 10; i++) {
+      ArrayList<Seat> row = new ArrayList<Seat>();
+      for (int j = 0; j < 10; j++) {
+        row.add(seatsList.get(counter));
+        counter++;
+      }
+      seats.add(i, row);
+    }
     model.addAttribute("seats", seats);
     boolean registeredUser = User.isLoggedIn();
     model.addAttribute("registeredUser", registeredUser);
