@@ -1,7 +1,5 @@
 package course.ensf607.assignment6.service;
 
-import course.ensf607.assignment6.controller.PaymentController;
-import course.ensf607.assignment6.entity.Payment;
 import course.ensf607.assignment6.entity.RegularUser;
 import course.ensf607.assignment6.entity.User;
 import course.ensf607.assignment6.repository.PaymentRepository;
@@ -10,6 +8,8 @@ import org.springframework.stereotype.Service;
 import java.time.LocalDate;
 import java.util.Optional;
 
+/**Payment service class that allows for paying and communicating with financial institutions.
+ */
 @Service
 public class PaymentService {
 

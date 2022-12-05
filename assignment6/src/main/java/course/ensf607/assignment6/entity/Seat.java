@@ -16,6 +16,9 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+/**Seat class that models a seat with its relations with other
+ * theatre objects..
+ */
 @Entity
 @Getter
 @Setter

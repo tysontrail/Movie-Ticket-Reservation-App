@@ -2,7 +2,6 @@ package course.ensf607.assignment6.controller;
 
 import course.ensf607.assignment6.entity.Seat;
 import course.ensf607.assignment6.entity.Showtime;
-import course.ensf607.assignment6.entity.Theatre;
 import course.ensf607.assignment6.service.ShowtimeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.format.annotation.DateTimeFormat;
@@ -11,8 +10,10 @@ import org.springframework.web.bind.annotation.*;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Optional;
-import java.util.Set;
 
+/**Showtime controller class used mostly for testing on postman.
+ * Note that controller means rest controller as per springboot.
+ */
 @RestController
 @CrossOrigin({"*"})
 public class ShowtimeController {
@@ -38,12 +39,6 @@ public class ShowtimeController {
     public Iterable<Showtime> getAllMovieShowtimes(String movieName){
         return this.showtimeService.getAllMovieShowtimes(movieName);
     }
-
-//    // The object version.
-//    @PostMapping({"/api/v1/selectshowtime"})
-//    public void selectShowtime(@RequestBody Showtime showtime) {
-//        this.showtimeService.selectShowtime(showtime);
-//    }
 
     // The ID version, the body/object might be a little complicated b/c of relationships.
     @PostMapping({"/api/v1/selectshowtime"})

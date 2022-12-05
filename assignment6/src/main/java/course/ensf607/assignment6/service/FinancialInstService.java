@@ -9,6 +9,8 @@ import org.springframework.stereotype.Service;
 
 import java.util.Optional;
 
+/**Financial Institution service for verifying account info, is a controller class but is a service class.
+ */
 @Service
 public class FinancialInstService {
 

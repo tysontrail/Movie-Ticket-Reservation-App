@@ -7,6 +7,8 @@ import org.springframework.stereotype.Service;
 
 import java.util.Optional;
 
+/**Theatre service class that allows for search, view and select.
+ */
 @Service
 public class TicketService {
 

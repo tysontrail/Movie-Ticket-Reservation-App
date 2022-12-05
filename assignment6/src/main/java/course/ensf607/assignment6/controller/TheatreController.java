@@ -6,6 +6,9 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+/**Theatre controller class used mostly for testing on postman.
+ * Note that controller means rest controller as per springboot.
+ */
 @RestController
 @CrossOrigin({"*"})
 public class TheatreController {
@@ -18,8 +21,7 @@ public class TheatreController {
   }
 
   // View all theatres and search theatres can't be viewed due to some issues with
-  // the result set eg tickets and seats haven't been created yet.
-  // TODO Fix.
+  // the result set eg tickets and seats haven't been created yet. Fixed.
   @GetMapping({"api/v1/viewalltheatres"})
   public Iterable<Theatre> viewAllTheatres() {
     return this.theatreService.getAllTheatres();
@@ -29,12 +31,6 @@ public class TheatreController {
   public Optional<Theatre> searchTheatres(@RequestParam String name) {
     return this.theatreService.searchTheatreByName(name);
   }
-
-  // The object version
-//  @PostMapping({"/api/v1/selecttheatre"})
-//  public void selectTheatre(@RequestBody Theatre theTheatre) {
-//    this.theatreService.selectTheatre(theTheatre);
-//  }
 
   // The string then find it version
   @PostMapping({"/api/v1/selecttheatre"})

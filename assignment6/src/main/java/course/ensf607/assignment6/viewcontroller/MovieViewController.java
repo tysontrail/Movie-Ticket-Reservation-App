@@ -11,6 +11,8 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+/**View controller for testing on the view forms and templates for the html stuff.
+ */
 @Controller
 @RequestMapping(path = "/movie")
 public class MovieViewController {

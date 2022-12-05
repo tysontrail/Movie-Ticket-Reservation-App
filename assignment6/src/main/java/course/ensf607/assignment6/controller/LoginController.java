@@ -7,6 +7,8 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+/**Login api used mostly for testing on postman.
+ */
 @RestController
 @CrossOrigin({"*"})
 public class LoginController {

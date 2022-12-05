@@ -8,28 +8,25 @@ import course.ensf607.assignment6.entity.Seat;
 import course.ensf607.assignment6.entity.Showtime;
 import course.ensf607.assignment6.entity.Ticket;
 import course.ensf607.assignment6.repository.SeatRepository;
-import course.ensf607.assignment6.repository.ShowtimeRepository;
+
+/**Seat service class that allows for view, add, select functionality on the backend..
+ */
 @Service
 public class SeatService {
 
     private final SeatRepository seatrepository ;
 
-    // private final ShowtimeRepository showtimeRepository;
     private final ShowtimeService showtimeService;
 
 
     private final TicketService ticketService;
 
-
-    // private Optional<Seat> seats;
     
     public SeatService(SeatRepository seatrepository, ShowtimeService showtimeService, TicketService ticketService) {
         this.seatrepository = seatrepository;
         this.showtimeService = showtimeService;
         this.ticketService = ticketService;
     }
-
-
 
 
     public Optional<Seat> SearchSeatById(Long id){

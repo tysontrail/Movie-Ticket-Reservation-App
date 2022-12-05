@@ -9,6 +9,8 @@ import java.util.Optional;
 import course.ensf607.assignment6.repository.TicketRepository;
 import org.springframework.stereotype.Service;
 
+/**Movie service class that has search and select capability.
+ */
 @Service
 public class MovieService {
 
@@ -39,11 +41,6 @@ public class MovieService {
     }
     return foundMovie;
   }
-
-//  public void selectMovie(Movie selectedMovie) {
-//    Ticket theTicket = Ticket.getInstance();
-//    theTicket.setMovieName(selectedMovie.getName());
-//  }
 
   public void selectMovie(String movieName) {
     Ticket theTicket = Ticket.getInstance();

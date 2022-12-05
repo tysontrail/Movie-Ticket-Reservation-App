@@ -17,6 +17,9 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+/**Payment class that models a payment being made for a transaction
+ * at the theatre.
+ */
 @Entity
 @Getter @Setter @NoArgsConstructor
 @Table(name = "payment")

@@ -17,6 +17,8 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+/**Movie entity class for modelling a movie.
+ */
 @Entity
 @Getter
 @Setter

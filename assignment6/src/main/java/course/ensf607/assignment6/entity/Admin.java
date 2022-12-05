@@ -13,6 +13,8 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+/**Admin entity class for movie theatre, not enough time to implement..
+ */
 @Entity
 @Getter @Setter @NoArgsConstructor
 @Table(name = "admin")
