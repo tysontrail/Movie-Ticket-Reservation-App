@@ -1,7 +1,6 @@
 package course.ensf607.assignment6.entity;
 
 import java.io.Serializable;
-import java.util.Comparator;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -88,11 +87,9 @@ public class Seat implements Serializable, Comparable<Seat> {
   public int compareTo(Seat o) {
     if (this.id < o.id) {
       return -1;
-    }
-    else if(this.id > o.id){
+    } else if (this.id > o.id) {
       return 1;
-    }
-    else{
+    } else {
       return 0;
     }
   }

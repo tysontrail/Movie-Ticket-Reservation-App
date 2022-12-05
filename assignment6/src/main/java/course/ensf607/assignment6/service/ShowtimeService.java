@@ -4,8 +4,6 @@ import course.ensf607.assignment6.entity.*;
 import course.ensf607.assignment6.repository.SeatRepository;
 import course.ensf607.assignment6.repository.ShowtimeRepository;
 import course.ensf607.assignment6.repository.TicketRepository;
-
-import java.sql.Array;
 import java.time.LocalDateTime;
 import java.util.*;
 import javax.transaction.Transactional;

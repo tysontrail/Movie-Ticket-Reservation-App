@@ -10,36 +10,20 @@
       integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
       crossorigin="anonymous"
     />
-    <title>Payment Confirmation</title>
+    <title>Payment Confirmed</title>
   </head>
   <body>
-    <h2>Payment Confirmation</h2>
+    <h2>Payment Confirmed! Ticket Details:</h2>
     <p th:text="'First Name: ' + ${user.firstName}" />
     <p th:text="'Last Name: ' + ${user.lastName}" />
-    <p th:text="'Email: ' + ${user.email}" />
-    <p th:text="'Credit Card: ' + ${user.creditCard}" />
-    <p th:text="'CVC: ' + ${user.cvcNumber}" />
-    <p th:text="'Expiry Date: ' + ${user.expiryDate}" />
     <p th:text="'Movie: ' + ${movie.name}" />
     <p th:text="'Theatre: ' + ${theatre.name}" />
     <p th:text="'Showtime: ' + ${showtime.startTime}" />
     <p th:text="'Seat Row: ' + ${seat.seatRow}" />
     <p th:text="'Seat Number: ' + ${seat.seatColumn}" />
     <p th:text="'Ticket Price: $' + ${seat.price}" />
-    <div th:if="${registeredUser}">
-      <a
-        th:href="@{/notification/registered(seatId=${seat.id})}"
-        class="btn btn-primary"
-        >Submit</a
-      >
-    </div>
-    <div th:unless="${registeredUser}">
-      <a
-        th:href="@{/notification/regular(seatId=${seat.id})}"
-        class="btn btn-primary"
-        >Submit</a
-      >
-    </div>
+    <p th:text="'Ticket Number: ' + ${ticket.id}" />
+    <a th:href="@{/movie}" class="btn btn-primary">Make another selection</a>
     <ul>
       <li>
         <div th:if="${registeredUser}">

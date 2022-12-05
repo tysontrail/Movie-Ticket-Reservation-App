@@ -21,8 +21,7 @@
     <h2>User Payment Info</h2>
     <div class="form">
       <form
-        action="#"
-        th:action="@{/payment}"
+        th:action="@{/payment/regular(seatId=${seatId})}"
         th:object="${user}"
         method="post"
       >
@@ -58,10 +57,14 @@
         </div>
       </form>
     </div>
-
     <ul>
       <li>
-        <a th:href="@{/login}">Back to login</a>
+        <div th:if="${registeredUser}">
+          <a th:href="@{/login}">Logout</a>
+        </div>
+        <div th:unless="${registeredUser}">
+          <a th:href="@{/login}">Login</a>
+        </div>
       </li>
     </ul>
   </body>
