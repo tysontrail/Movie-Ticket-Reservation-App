@@ -10,7 +10,7 @@
       integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
       crossorigin="anonymous"
     />
-    <title>Login</title>
+    <title>Movie Selection</title>
   </head>
   <style>
     .error {
@@ -18,23 +18,15 @@
     }
   </style>
   <body>
-    <h1>Welcome to the Movie Theatre Reservation App!</h1>
-    <h2>Login</h2>
-    <form
-      action="#"
-      th:action="@{/login}"
-      th:object="${loginForm}"
-      method="post"
-    >
+    <h1>Movies</h1>
+    <h2>Search a Movie by Name</h2>
+    <form action="#" th:action="@{/movie}" th:object="${movie}" method="post">
       <p>
-        Username:
-        <input type="text" th:field="*{userName}" id="userName" required />
+        <input type="text" th:field="${movie.name}" id="movieName" required />
       </p>
       <p>
-        Password:
-        <input type="password" th:field="*{password}" id="password" required />
+        <input type="submit" value="Submit" />
       </p>
-      <input type="submit" value="Submit" />
       <div th:if="${#fields.hasErrors('global')}">
         <p
           th:each="err : ${#fields.errors('global')}"
@@ -43,11 +35,16 @@
         ></p>
       </div>
     </form>
+    <a th:href="@{/movie}" class="btn btn-primary">View All Movies</a>
     <ul>
       <li>
-        <a th:href="@{/register}">Not registered? Click here to register</a>
+        <div th:if="${registeredUser}">
+          <a th:href="@{/login}">Logout</a>
+        </div>
+        <div th:unless="${registeredUser}">
+          <a th:href="@{/login}">Login</a>
+        </div>
       </li>
-      <li><a th:href="@{/movie/menu}">Continue as guest</a></li>
     </ul>
   </body>
 </html>

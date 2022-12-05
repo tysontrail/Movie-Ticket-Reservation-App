@@ -33,8 +33,9 @@ public class RegisteredPaymentViewController {
 
   @GetMapping
   public String paymentConfirmation(@RequestParam Long seatId, Model model) {
-
+    boolean registeredUser = User.isLoggedIn();
     User user = User.getInstance();
+
     model.addAttribute("user", user);
     Seat seat = seatService.SearchSeatById(seatId).get();
     model.addAttribute("seat", seat);
@@ -44,6 +45,7 @@ public class RegisteredPaymentViewController {
     model.addAttribute("theatre", theatre);
     Movie movie = showtime.getMovie();
     model.addAttribute("movie", movie);
+    model.addAttribute("registeredUser", registeredUser);
 
     return "payment-confirmation";
   }

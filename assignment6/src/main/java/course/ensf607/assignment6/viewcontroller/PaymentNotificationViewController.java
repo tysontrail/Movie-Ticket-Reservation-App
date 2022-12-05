@@ -63,7 +63,8 @@ public class PaymentNotificationViewController {
     Theatre theatre = showtime.getTheatre();
     Movie movie = showtime.getMovie();
 
-    paymentConfirmation = paymentService.registeredUserPayTicket(User.getInstance().getUserName());
+    paymentConfirmation = paymentService.registeredUserPayTicket(user.getUserName());
+    System.out.println(paymentConfirmation);
     if (paymentConfirmation) {
       Payment payment = new Payment(user, seat.getPrice(), paymentConfirmation);
       Ticket ticket = new Ticket(user, theatre, seat, payment, seat.getPrice());
@@ -80,6 +81,7 @@ public class PaymentNotificationViewController {
       model.addAttribute("ticket", ticket);
       return "payment-receipt";
     } else {
+      model.addAttribute("user", user);
       return "payment-error";
     }
   }

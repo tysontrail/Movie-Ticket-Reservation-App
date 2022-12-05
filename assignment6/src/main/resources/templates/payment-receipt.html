@@ -23,7 +23,9 @@
     <p th:text="'Seat Number: ' + ${seat.seatColumn}" />
     <p th:text="'Ticket Price: $' + ${seat.price}" />
     <p th:text="'Ticket Number: ' + ${ticket.id}" />
-    <a th:href="@{/movie}" class="btn btn-primary">Make another selection</a>
+    <a th:href="@{/movie/menu}" class="btn btn-primary"
+      >Make another selection</a
+    >
     <ul>
       <li>
         <div th:if="${registeredUser}">

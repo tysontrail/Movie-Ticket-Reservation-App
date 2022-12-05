@@ -59,6 +59,6 @@ public class LoginViewController {
       return "login";
     }
 
-    return "redirect:/movie";
+    return "redirect:/movie/menu";
   }
 }

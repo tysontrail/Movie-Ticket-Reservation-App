@@ -3,10 +3,9 @@ package course.ensf607.assignment6.service;
 import course.ensf607.assignment6.entity.Movie;
 import course.ensf607.assignment6.entity.Ticket;
 import course.ensf607.assignment6.repository.MovieRepository;
+import course.ensf607.assignment6.repository.TicketRepository;
 import java.time.LocalDate;
 import java.util.Optional;
-
-import course.ensf607.assignment6.repository.TicketRepository;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -30,20 +29,20 @@ public class MovieService {
 
   public Optional<Movie> searchAnnouncedMovies(String name) {
     Iterable<Movie> movieList = getAnnouncedMovies();
-    Optional<Movie> foundMovie = null;
+    Optional<Movie> foundMovie;
     for (Movie m : movieList) {
       if (m.getName().equals(name) && m.getPublicStart().compareTo(LocalDate.now()) <= 0) {
         foundMovie = Optional.of(m);
-        break;
+        return foundMovie;
       }
     }
-    return foundMovie;
+    return Optional.empty();
   }
 
-//  public void selectMovie(Movie selectedMovie) {
-//    Ticket theTicket = Ticket.getInstance();
-//    theTicket.setMovieName(selectedMovie.getName());
-//  }
+  //  public void selectMovie(Movie selectedMovie) {
+  //    Ticket theTicket = Ticket.getInstance();
+  //    theTicket.setMovieName(selectedMovie.getName());
+  //  }
 
   public void selectMovie(String movieName) {
     Ticket theTicket = Ticket.getInstance();

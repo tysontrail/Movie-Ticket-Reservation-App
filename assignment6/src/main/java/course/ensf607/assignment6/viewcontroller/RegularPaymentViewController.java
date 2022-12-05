@@ -38,6 +38,7 @@ public class RegularPaymentViewController {
     model.addAttribute("theatre", theatre);
     Movie movie = showtime.getMovie();
     model.addAttribute("movie", movie);
+
     return "payment-confirmation";
   }
 }

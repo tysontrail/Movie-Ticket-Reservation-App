@@ -10,14 +10,39 @@
       integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
       crossorigin="anonymous"
     />
-    <title>Payment Error</title>
+    <title>Movie Selection</title>
   </head>
+  <style>
+    .error {
+      color: red;
+    }
+  </style>
   <body>
-    <h2>Unsuccessful Payment!</h2>
-    <h3>Please contact your financial institution.</h3>
-    <a th:href="@{/movie/menu}" class="btn btn-primary"
-      >Make another selection</a
-    >
+    <h1>Movies</h1>
+    <h2>Please select a Movie</h2>
+    <table class="table">
+      <thead>
+        <tr>
+          <th scope="col">Movie Name</th>
+          <th scope="col">Movie Description</th>
+          <th scope="col">Selection</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td th:text="${movie.name}"></td>
+          <td th:text="${movie.description}"></td>
+          <td>
+            <a
+              th:href="@{/theatre(movieName=${movie.name})}"
+              class="btn btn-primary"
+              >Select Movie</a
+            >
+          </td>
+          <br />
+        </tr>
+      </tbody>
+    </table>
     <ul>
       <li>
         <div th:if="${registeredUser}">
